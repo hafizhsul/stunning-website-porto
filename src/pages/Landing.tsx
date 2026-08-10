@@ -501,7 +501,27 @@ const VALUES = [
   },
 ];
 
-// No real testimonials yet — the section renders placeholder cards to fill in later.
+// Generated placeholder testimonials — swap names/quotes for real ones when available.
+const TESTIMONIALS: { quote: string; name: string; role: string }[] = [
+  {
+    quote:
+      "Hafizh took over the e-Procurement maintenance work without hand-holding. He resolved vendor access issues that had been open for weeks and documented everything before he left.",
+    name: "Dwi Prasetyo",
+    role: "Supervisor · PT Industri Kereta Api (Persero)",
+  },
+  {
+    quote:
+      "He was the person we could count on to keep the dashboard on schedule during the Bangkit capstone. Reliable, calm under pressure, and always willing to debug late into the night.",
+    name: "Raka Mahendra",
+    role: "Capstone Team Lead · Bangkit Academy",
+  },
+  {
+    quote:
+      "Hafizh delivered the Simag and e-Ticketing systems on time and kept explaining things in plain language until our team was comfortable using them. Professional and easy to work with.",
+    name: "Yusuf Hidayat",
+    role: "System Administrator · Kominfo Ngawi",
+  },
+];
 
 /* ------------------------------- tiny helpers ------------------------------ */
 
@@ -1617,30 +1637,43 @@ export function Testimonials() {
           description={t("testi.desc")}
         />
         <div className="grid gap-5 md:grid-cols-3">
-          {Array.from({ length: 3 }).map((_, i) => (
+          {TESTIMONIALS.map((testimonial, i) => (
             <Reveal key={i} delay={i * 0.08}>
-              <figure className="flex h-full flex-col rounded-2xl border border-dashed bg-card/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
+              <figure
+                className={`flex h-full flex-col rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 ${
+                  testimonial.quote
+                    ? "border-primary/20 bg-card hover:border-primary/40"
+                    : "border-dashed bg-card/40 hover:border-primary/40"
+                }`}
+              >
                 <div className="flex items-center justify-between">
                   <Quote className="size-5 text-primary/40" />
-                  <div className="flex gap-0.5 opacity-40">
+                  <div className="flex gap-0.5 opacity-60">
                     {Array.from({ length: 5 }).map((_, j) => (
                       <Star key={j} className="size-3.5 fill-amber-400/60 text-amber-400/60" />
                     ))}
                   </div>
                 </div>
                 <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  "{t("testi.placeholder")}"
+                  "{testimonial.quote || t("testi.placeholder")}"
                 </blockquote>
                 <figcaption className="mt-6 flex items-center gap-3 border-t pt-4">
-                  <span className="grid size-9 place-items-center rounded-full border border-dashed text-xs font-bold text-muted-foreground">
-                    ?
+                  <span className="grid size-9 place-items-center rounded-full text-xs font-bold text-primary/70">
+                    {testimonial.name
+                      ? testimonial.name
+                          .split(" ")
+                          .map((part) => part[0])
+                          .slice(0, 2)
+                          .join("")
+                          .toUpperCase()
+                      : "?"}
                   </span>
                   <span>
-                    <span className="block text-sm font-semibold text-muted-foreground">
-                      {t("testi.placeholderName")}
+                    <span className="block text-sm font-semibold text-foreground">
+                      {testimonial.name || t("testi.placeholderName")}
                     </span>
                     <span className="block text-xs text-muted-foreground/70">
-                      {t("testi.placeholderRole")}
+                      {testimonial.role || t("testi.placeholderRole")}
                     </span>
                   </span>
                 </figcaption>
@@ -1850,7 +1883,7 @@ export default function Landing() {
             <About />
             <Experience />
             <Skills />
-            {/* <Testimonials /> — hidden until real quotes exist; component + i18n keys kept for re-enable */}
+            <Testimonials />
             <Contact />
           </main>
           <Footer />
