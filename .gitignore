@@ -16,6 +16,9 @@ dist-ssr
 .freebuff/
 .impeccable/
 
+# Local agent guidelines (not part of the repo)
+AGENTS.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
