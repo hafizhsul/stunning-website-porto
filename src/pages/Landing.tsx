@@ -1606,7 +1606,7 @@ function Skills() {
 
 /* -------------------------------- testimonials ------------------------------ */
 
-function Testimonials() {
+export function Testimonials() {
   const { t } = useI18n();
   return (
     <section id="testimonials" className="py-24 sm:py-28">
