@@ -282,23 +282,6 @@ const PROJECTS: Project[] = [
     links: { source: "https://github.com/hafizhsul/MonitorRad" },
   },
   {
-    id: "stuntzilla",
-    title: "StuntZilla",
-    category: "Mobile",
-    year: "2024",
-    description: {
-      en: "Mobile app for stunting symptom detection.",
-      id: "Aplikasi mobile untuk deteksi gejala stunting.",
-    },
-    tags: ["Kotlin", "Android"],
-    url: "stuntzilla",
-    icon: Heart,
-    chip: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
-    gradient: "from-indigo-500/15 via-indigo-500/5 to-transparent",
-    image: "/stuntzilla/preview.png",
-    links: { source: "https://github.com/hafizhsul" },
-  },
-  {
     id: "intervalfit",
     title: "IntervalFit",
     category: "Mobile",
@@ -313,6 +296,23 @@ const PROJECTS: Project[] = [
     chip: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20",
     gradient: "from-rose-500/15 via-rose-500/5 to-transparent",
     image: "/intervalfit/preview.png",
+    links: { source: "https://github.com/hafizhsul" },
+  },
+  {
+    id: "stuntzilla",
+    title: "StuntZilla",
+    category: "Mobile",
+    year: "2024",
+    description: {
+      en: "Mobile app for stunting symptom detection.",
+      id: "Aplikasi mobile untuk deteksi gejala stunting.",
+    },
+    tags: ["Kotlin", "Android"],
+    url: "stuntzilla",
+    icon: Heart,
+    chip: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
+    gradient: "from-indigo-500/15 via-indigo-500/5 to-transparent",
+    image: "/stuntzilla/preview.png",
     links: { source: "https://github.com/hafizhsul" },
   },
 ];
@@ -1266,7 +1266,13 @@ function ProjectPreview({
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  className,
+}: {
+  project: Project;
+  className?: string;
+}) {
   const { t, pick } = useI18n();
   return (
     <motion.article
@@ -1275,7 +1281,10 @@ function ProjectCard({ project }: { project: Project }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10"
+      className={cn(
+        "group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10",
+        className,
+      )}
     >
       <div className="border-b border-border/70">
         <div className="flex items-center gap-1.5 bg-muted/40 px-4 py-2.5">
@@ -1375,10 +1384,18 @@ function Projects() {
           ))}
         </Reveal>
 
-        <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="grid gap-6 md:grid-cols-2">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+            {filtered.map((project, i) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                className={cn(
+                  filtered.length > 2 &&
+                    (i === 0 || i === filtered.length - 1) &&
+                    "md:col-span-2",
+                )}
+              />
             ))}
           </AnimatePresence>
         </motion.div>
