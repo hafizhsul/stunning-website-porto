@@ -20,7 +20,7 @@
       // Apply saved theme before first paint to avoid a flash of the wrong theme.
       (function () {
         try {
-          if (localStorage.getItem("theme") === "dark") {
+          if (localStorage.getItem("theme") !== "light") {
             document.documentElement.classList.add("dark");
           }
         } catch (e) {}

@@ -945,10 +945,6 @@ function Hero() {
   const { t } = useI18n();
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-16 sm:pt-40 lg:pb-24">
-      {/* background grid + glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_0%,black_25%,transparent_100%)]" />
-      <div className="pointer-events-none absolute -top-44 left-1/2 -z-10 h-[480px] w-[820px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-
       <div className="mx-auto grid max-w-6xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -1844,7 +1840,7 @@ export default function Landing() {
       }}
     >
       <MotionConfig reducedMotion="user">
-        <div className="isolate min-h-screen bg-background text-foreground antialiased">
+        <div className="isolate page-bg min-h-screen text-foreground antialiased">
           <ParallaxBackground />
           <Navbar />
           <main>

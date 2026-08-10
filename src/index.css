@@ -6143,7 +6143,7 @@
   --sidebar-ring: oklch(0.62 0.17 264);
 }
 .dark {
-  --background: oklch(0.16 0.014 260);
+  --background: #0b0d13;
   --foreground: oklch(0.95 0.004 252);
   --card: oklch(0.205 0.016 260);
   --card-foreground: oklch(0.95 0.004 252);
@@ -6749,4 +6749,13 @@
   font-weight: 700;
   color: var(--foreground);
   opacity: 0.03;
+}
+/* soft terminal-green tint for the watermark and glyphs in dark mode */
+.dark .px-item.watermark,
+.dark .px-item.glyph {
+  color: oklch(76% 0.14 150);
+}
+/* page background: flat theme color (grid & gradient removed per design) */
+.page-bg {
+  background: var(--background);
 }
