@@ -1,6 +1,5 @@
 import { AnimatePresence, motion, MotionConfig, useScroll } from "framer-motion";
 import {
-  Activity,
   ArrowRight,
   ArrowUpRight,
   Atom,
@@ -17,7 +16,6 @@ import {
   MessageCircle,
   Moon,
   Quote,
-  Radio,
   Server,
   Sparkles,
   Star,
@@ -239,7 +237,6 @@ interface Project {
   description: Localized;
   tags: string[];
   url: string;
-  icon: LucideIcon;
   chip: string;
   gradient: string;
   image?: string;
@@ -247,6 +244,25 @@ interface Project {
 }
 
 const PROJECTS: Project[] = [
+  {
+    id: "portfolio",
+    title: "Hafizhesbe — Portfolio",
+    category: "Frontend",
+    year: "2026",
+    description: {
+      en: "This very portfolio site — a bilingual React single-page site with Framer Motion animations.",
+      id: "Portofolio ini sendiri — situs React satu halaman bilingual dengan animasi Framer Motion.",
+    },
+    tags: ["React", "TypeScript", "Tailwind CSS"],
+    url: "hafizhesbe.my.id",
+    chip: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20",
+    gradient: "from-violet-500/15 via-violet-500/5 to-transparent",
+    image: "/porto/preview.png",
+    links: {
+      live: "https://hafizhesbe.my.id",
+      source: "https://github.com/hafizhsul",
+    },
+  },
   {
     id: "inka-eprocurement",
     title: "INKA — e-Procurement",
@@ -258,7 +274,6 @@ const PROJECTS: Project[] = [
     },
     tags: ["Laravel", "Symfony", "e-Procurement"],
     url: "inka-eprocurement",
-    icon: Server,
     chip: "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20",
     gradient: "from-sky-500/15 via-sky-500/5 to-transparent",
     image: "/inka/Screenshot_20260803_110422.png",
@@ -275,28 +290,10 @@ const PROJECTS: Project[] = [
     },
     tags: ["Laravel", "Telegram Bot", "IoT"],
     url: "github.com/hafizhsul/MonitorRad",
-    icon: Radio,
     chip: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
     gradient: "from-emerald-500/15 via-emerald-500/5 to-transparent",
     image: "/radmonitor/preview.png",
     links: { source: "https://github.com/hafizhsul/MonitorRad" },
-  },
-  {
-    id: "intervalfit",
-    title: "IntervalFit",
-    category: "Mobile",
-    year: "2025",
-    description: {
-      en: "Quick-setup interval timer with auto voice countdown for hands-free workouts.",
-      id: "Interval timer cepat setup, mudah dibaca saat olahraga, dengan voice countdown otomatis.",
-    },
-    tags: ["Flutter", "Dart"],
-    url: "intervalfit",
-    icon: Activity,
-    chip: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20",
-    gradient: "from-rose-500/15 via-rose-500/5 to-transparent",
-    image: "/intervalfit/preview.png",
-    links: { source: "https://github.com/hafizhsul" },
   },
   {
     id: "stuntzilla",
@@ -309,10 +306,25 @@ const PROJECTS: Project[] = [
     },
     tags: ["Kotlin", "Android"],
     url: "stuntzilla",
-    icon: Heart,
     chip: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
     gradient: "from-indigo-500/15 via-indigo-500/5 to-transparent",
     image: "/stuntzilla/preview.png",
+    links: { source: "https://github.com/hafizhsul" },
+  },
+  {
+    id: "intervalfit",
+    title: "IntervalFit",
+    category: "Mobile",
+    year: "2025",
+    description: {
+      en: "Quick-setup interval timer with auto voice countdown for hands-free workouts.",
+      id: "Interval timer cepat setup, mudah dibaca saat olahraga, dengan voice countdown otomatis.",
+    },
+    tags: ["Flutter", "Dart"],
+    url: "intervalfit",
+    chip: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20",
+    gradient: "from-rose-500/15 via-rose-500/5 to-transparent",
+    image: "/intervalfit/preview.png",
     links: { source: "https://github.com/hafizhsul" },
   },
 ];
@@ -831,9 +843,11 @@ function Navbar() {
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="#top" className="group flex items-center gap-2.5 font-semibold tracking-tight">
-          <span className="grid size-8 place-items-center rounded-lg bg-primary text-sm font-bold text-primary-foreground shadow-sm transition-transform group-hover:-rotate-3">
-            HSB
-          </span>
+          <img
+            src="/logo.svg"
+            alt="HSB"
+            className="size-8 rounded-lg shadow-sm transition-transform group-hover:-rotate-3"
+          />
           <span className="hidden sm:block">Hafizh Sulthan Bachtiyar</span>
         </a>
 
@@ -1175,9 +1189,11 @@ function Hero() {
 
           {/* overlapping profile card */}
           <div className="absolute -bottom-1 left-2 flex items-center gap-3 rounded-2xl border bg-card p-3.5 shadow-xl shadow-primary/10 sm:-left-4">
-            <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-sm font-bold text-primary-foreground">
-              HSB
-            </span>
+            <img
+              src="/portrait.jpg"
+              alt="Hafizh Sulthan Bachtiyar"
+              className="size-10 rounded-full object-cover"
+            />
             <span>
               <span className="block text-sm font-semibold leading-none">Hafizh Sulthan Bachtiyar</span>
               <span className="mt-1.5 flex items-center gap-1.5 text-[11px] text-muted-foreground">
@@ -1229,18 +1245,16 @@ function Marquee() {
 /* --------------------------------- projects -------------------------------- */
 
 function ProjectPreview({
-  icon: Icon,
   gradient,
   image,
 }: {
-  icon: LucideIcon;
   gradient: string;
   image?: string;
 }) {
   return (
     <div
       className={cn(
-        "relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br",
+        "relative h-56 overflow-hidden bg-gradient-to-br",
         gradient,
       )}
     >
@@ -1252,16 +1266,9 @@ function ProjectPreview({
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
       )}
-      {/* subtle dark gradient so the image stays legible and the badge pops */}
+      {/* subtle dark gradient so the image stays legible */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
       <div className="pointer-events-none absolute inset-0 text-foreground opacity-[0.06] [background-image:radial-gradient(circle_at_1px_1px,currentColor_1px,transparent_0)] [background-size:18px_18px]" />
-      <motion.div
-        whileHover={{ scale: 1.1, rotate: -2 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="relative z-10 grid size-16 place-items-center rounded-2xl border border-background/50 bg-background/90 shadow-xl shadow-black/25 backdrop-blur"
-      >
-        <Icon className="size-7" />
-      </motion.div>
     </div>
   );
 }
@@ -1287,7 +1294,6 @@ function ProjectCard({ project }: { project: Project }) {
           </span>
         </div>
         <ProjectPreview
-          icon={project.icon}
           gradient={project.gradient}
           image={project.image}
         />
@@ -1760,9 +1766,7 @@ function Footer() {
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="max-w-xs">
             <a href="#top" className="flex items-center gap-2.5 font-semibold tracking-tight">
-              <span className="grid size-8 place-items-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
-                HSB
-              </span>
+              <img src="/logo.svg" alt="HSB" className="size-8 rounded-lg" />
               Hafizh Sulthan Bachtiyar
             </a>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
