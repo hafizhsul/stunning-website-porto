@@ -6717,6 +6717,10 @@
   color: var(--foreground);
   opacity: 0.045;
   white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35em;
   transform: rotate(-15deg);
   /* fade the edges so it reads as a backdrop instead of clutter behind text */
   -webkit-mask-image: linear-gradient(
@@ -6733,6 +6737,11 @@
     black 85%,
     transparent 100%
   );
+}
+.px-item.watermark .watermark-status {
+  font-size: clamp(1.25rem, 2.5vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 .px-item.glyph {
   font-family: var(--font-mono);

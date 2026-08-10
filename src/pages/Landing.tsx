@@ -623,9 +623,13 @@ function ParallaxBackground() {
       const scrolled = window.scrollY;
       items.forEach((el) => {
         const speed = parseFloat(el.getAttribute("data-parallax-speed") ?? "0");
-        el.style.transform = el.classList.contains("watermark")
-          ? `rotate(-15deg) translateY(${scrolled * speed}px)`
-          : `translateY(${scrolled * speed}px)`;
+        if (el.classList.contains("watermark")) {
+          el.style.transform = `rotate(-15deg) translateY(${scrolled * speed}px)`;
+        } else {
+          // optional horizontal drift for the deeper glyph layer
+          const dx = parseFloat(el.getAttribute("data-parallax-x") ?? "0");
+          el.style.transform = `translate3d(${scrolled * dx}px, ${scrolled * speed}px, 0)`;
+        }
       });
     };
     const onScroll = () => {
@@ -640,10 +644,13 @@ function ParallaxBackground() {
   }, []);
 
   return (
-    <div className="parallax-container" aria-hidden="true">
-      <div className="px-item watermark" data-parallax-speed="0.15">
-        01001000 01010011 01000010 &gt;_ INIT SYSTEM... OK. LOADING MODULES...
-        DONE. AWAITING INPUT... 01010011
+    <>
+      <div className="parallax-container" aria-hidden="true">
+        <div className="px-item watermark" data-parallax-speed="0.15">
+        <span className="watermark-brand">hafizhesbe.my.id</span>
+        <span className="watermark-status">
+          &gt;_ INIT OK · MODULES LOADED · AWAITING INPUT
+        </span>
       </div>
       <span
         className="px-item glyph"
@@ -674,6 +681,91 @@ function ParallaxBackground() {
         {"()"}
       </span>
     </div>
+
+    {/* second layer: faint glyphs drifting at different speeds for depth */}
+    <div className="parallax-container" aria-hidden="true">
+      <span
+        className="px-item glyph"
+        data-parallax-speed="0.22"
+        data-parallax-x="0.1"
+        style={{ top: "10%", left: "78%", fontSize: "1.6rem", opacity: 0.04 }}
+      >
+        $
+      </span>
+      <span
+        className="px-item glyph"
+        data-parallax-speed="-0.15"
+        data-parallax-x="-0.08"
+        style={{ top: "22%", left: "12%", fontSize: "2rem", opacity: 0.035 }}
+      >
+        #
+      </span>
+      <span
+        className="px-item glyph"
+        data-parallax-speed="0.3"
+        data-parallax-x="0.14"
+        style={{ top: "38%", left: "85%", fontSize: "1.3rem", opacity: 0.03 }}
+      >
+        |
+      </span>
+      <span
+        className="px-item glyph"
+        data-parallax-speed="-0.2"
+        data-parallax-x="0.06"
+        style={{ top: "55%", left: "6%", fontSize: "2.4rem", opacity: 0.045 }}
+      >
+        ~
+      </span>
+      <span
+        className="px-item glyph"
+        data-parallax-speed="0.18"
+        data-parallax-x="-0.12"
+        style={{ top: "68%", left: "75%", fontSize: "1.5rem", opacity: 0.03 }}
+      >
+        _
+      </span>
+      <span
+        className="px-item glyph"
+        data-parallax-speed="0.35"
+        data-parallax-x="0.1"
+        style={{ top: "78%", left: "25%", fontSize: "1.3rem", opacity: 0.04 }}
+      >
+        {"./"}
+      </span>
+      <span
+        className="px-item glyph"
+        data-parallax-speed="-0.1"
+        data-parallax-x="0.05"
+        style={{ top: "88%", left: "60%", fontSize: "1.8rem", opacity: 0.035 }}
+      >
+        {"[]"}
+      </span>
+      <span
+        className="px-item glyph"
+        data-parallax-speed="0.25"
+        data-parallax-x="-0.1"
+        style={{ top: "30%", left: "55%", fontSize: "1.6rem", opacity: 0.04 }}
+      >
+        {"<>"}
+      </span>
+      <span
+        className="px-item glyph"
+        data-parallax-speed="0.12"
+        data-parallax-x="0.08"
+        style={{ top: "60%", left: "92%", fontSize: "2rem", opacity: 0.03 }}
+      >
+        {"{}"}
+      </span>
+      <span
+        className="px-item glyph"
+        data-parallax-speed="-0.25"
+        data-parallax-x="-0.06"
+        style={{ top: "82%", left: "88%", fontSize: "1.4rem", opacity: 0.035 }}
+      >
+        {"%%"}
+      </span>
+      </div>
+    </>
   );
 }
 
