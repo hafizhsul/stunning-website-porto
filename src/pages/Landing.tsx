@@ -221,6 +221,11 @@ const TECH = [
   "IoT",
   "Advantech",
   "Git",
+  "TypeScript",
+  "React",
+  "Vite",
+  "Tailwind CSS",
+  "Framer Motion",
 ];
 
 const FILTERS = ["All", "Full-stack", "Frontend", "Backend", "Mobile", "Open source"] as const;
