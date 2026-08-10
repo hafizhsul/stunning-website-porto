@@ -1850,7 +1850,7 @@ export default function Landing() {
             <About />
             <Experience />
             <Skills />
-            <Testimonials />
+            {/* <Testimonials /> — hidden until real quotes exist; component + i18n keys kept for re-enable */}
             <Contact />
           </main>
           <Footer />
