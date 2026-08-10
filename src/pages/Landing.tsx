@@ -1266,13 +1266,7 @@ function ProjectPreview({
   );
 }
 
-function ProjectCard({
-  project,
-  className,
-}: {
-  project: Project;
-  className?: string;
-}) {
+function ProjectCard({ project }: { project: Project }) {
   const { t, pick } = useI18n();
   return (
     <motion.article
@@ -1281,10 +1275,7 @@ function ProjectCard({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10",
-        className,
-      )}
+      className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10"
     >
       <div className="border-b border-border/70">
         <div className="flex items-center gap-1.5 bg-muted/40 px-4 py-2.5">
@@ -1384,18 +1375,10 @@ function Projects() {
           ))}
         </Reveal>
 
-        <motion.div layout className="grid gap-6 md:grid-cols-2">
+        <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                className={cn(
-                  filtered.length > 2 &&
-                    (i === 0 || i === filtered.length - 1) &&
-                    "md:col-span-2",
-                )}
-              />
+            {filtered.map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
           </AnimatePresence>
         </motion.div>
