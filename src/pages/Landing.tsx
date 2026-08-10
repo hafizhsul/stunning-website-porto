@@ -1648,9 +1648,9 @@ export function Testimonials() {
               >
                 <div className="flex items-center justify-between">
                   <Quote className="size-5 text-primary/40" />
-                  <div className="flex gap-0.5 opacity-60">
+                  <div className="flex gap-0.5">
                     {Array.from({ length: 5 }).map((_, j) => (
-                      <Star key={j} className="size-3.5 fill-amber-400/60 text-amber-400/60" />
+                      <Star key={j} className="size-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
                 </div>
