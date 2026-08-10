@@ -16,9 +16,11 @@ import {
   Menu,
   MessageCircle,
   Moon,
+  Quote,
   Radio,
   Server,
   Sparkles,
+  Star,
   Sun,
   Terminal,
   Wrench,
@@ -83,6 +85,12 @@ const EN_STRINGS = {
   "skills.title": "A stack that ships",
   "skills.desc":
     "Deep, working knowledge across the whole delivery path — not just résumé keywords.",
+  "testi.eyebrow": "Kind words",
+  "testi.title": "What collaborators say",
+  "testi.desc": "I'd rather let the people I've built with do the talking.",
+  "testi.placeholder": "Your testimonial goes here — what was it like working together?",
+  "testi.placeholderName": "Your name",
+  "testi.placeholderRole": "Role · Company",
   "contact.badge": "Get in touch",
   "contact.title":
     "Open to IT Support/Helpdesk roles as well as software project collaboration.",
@@ -142,6 +150,12 @@ const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "skills.title": "Kemampuan",
   "skills.desc":
     "Pengetahuan kerja yang mendalam di seluruh jalur pengiriman — bukan sekadar kata kunci di resume.",
+  "testi.eyebrow": "Kata mereka",
+  "testi.title": "Apa kata kolaborator",
+  "testi.desc": "Biarkan orang-orang yang pernah bekerja sama yang berbicara.",
+  "testi.placeholder": "Testimoni Anda di sini — bagaimana rasanya bekerja sama?",
+  "testi.placeholderName": "Nama Anda",
+  "testi.placeholderRole": "Peran · Perusahaan",
   "contact.badge": "Hubungi Saya",
   "contact.title":
     "Terbuka untuk peran IT Support/Helpdesk maupun kolaborasi proyek software.",
@@ -486,6 +500,8 @@ const VALUES = [
     id: "Troubleshooting cepat + pemahaman teknis yang lebih dalam",
   },
 ];
+
+// No real testimonials yet — the section renders placeholder cards to fill in later.
 
 /* ------------------------------- tiny helpers ------------------------------ */
 
@@ -1500,6 +1516,55 @@ function Skills() {
   );
 }
 
+/* -------------------------------- testimonials ------------------------------ */
+
+function Testimonials() {
+  const { t } = useI18n();
+  return (
+    <section id="testimonials" className="py-24 sm:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <SectionHeading
+          eyebrow={t("testi.eyebrow")}
+          title={t("testi.title")}
+          description={t("testi.desc")}
+        />
+        <div className="grid gap-5 md:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Reveal key={i} delay={i * 0.08}>
+              <figure className="flex h-full flex-col rounded-2xl border border-dashed bg-card/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
+                <div className="flex items-center justify-between">
+                  <Quote className="size-5 text-primary/40" />
+                  <div className="flex gap-0.5 opacity-40">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <Star key={j} className="size-3.5 fill-amber-400/60 text-amber-400/60" />
+                    ))}
+                  </div>
+                </div>
+                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  "{t("testi.placeholder")}"
+                </blockquote>
+                <figcaption className="mt-6 flex items-center gap-3 border-t pt-4">
+                  <span className="grid size-9 place-items-center rounded-full border border-dashed text-xs font-bold text-muted-foreground">
+                    ?
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-muted-foreground">
+                      {t("testi.placeholderName")}
+                    </span>
+                    <span className="block text-xs text-muted-foreground/70">
+                      {t("testi.placeholderRole")}
+                    </span>
+                  </span>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------------------------------- contact --------------------------------- */
 
 function Contact() {
@@ -1697,6 +1762,7 @@ export default function Landing() {
             <About />
             <Experience />
             <Skills />
+            <Testimonials />
             <Contact />
           </main>
           <Footer />
