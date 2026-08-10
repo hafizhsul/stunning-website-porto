@@ -439,7 +439,7 @@ const SKILL_GROUPS = [
       en: "Languages used to build applications.",
       id: "Bahasa yang dipakai untuk membangun aplikasi.",
     },
-    tags: ["PHP", "Kotlin", "JavaScript", "C++"],
+    tags: ["PHP", "Kotlin", "JavaScript", "TypeScript", "C++"],
   },
   {
     title: { en: "Tools & Systems", id: "Tools & Sistem" },
@@ -448,7 +448,7 @@ const SKILL_GROUPS = [
       en: "Frameworks and tools used across projects.",
       id: "Framework dan alat yang dipakai di proyek.",
     },
-    tags: ["Laravel", "Symfony", "Advantech Monitoring", "Android", "Flutter"],
+    tags: ["Laravel", "Symfony", "Advantech Monitoring", "Android", "Flutter", "React", "Vite", "Tailwind CSS", "Framer Motion"],
   },
   {
     title: "Soft Skills",
