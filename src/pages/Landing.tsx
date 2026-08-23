@@ -1019,7 +1019,7 @@ function ProjectModal({
         </button>
 
         <div className="max-h-[85vh] overflow-y-auto">
-          <div className="relative border-b bg-muted/40">
+          <div className="relative overflow-hidden border-b bg-zinc-950">
             <AnimatePresence initial={false} mode="popLayout">
               <motion.img
                 key={gallery[idx] ?? project.id}
@@ -1038,7 +1038,7 @@ function ProjectModal({
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="aspect-[16/10] w-full cursor-grab object-cover active:cursor-grabbing"
+                className="max-h-[min(65vh,540px)] w-full cursor-grab object-contain active:cursor-grabbing"
               />
             </AnimatePresence>
 
