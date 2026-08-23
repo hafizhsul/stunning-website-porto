@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, MotionConfig, useScroll } from "framer-motion";
 import {
+  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   Atom,
@@ -12,6 +13,7 @@ import {
   Mail,
   MapPin,
   Menu,
+  MessageCircle,
   Moon,
   Quote,
   Sparkles,
@@ -791,7 +793,13 @@ function ProjectPreview({
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  onOpen,
+}: {
+  project: Project;
+  onOpen: () => void;
+}) {
   const { t, pick } = useI18n();
   return (
     <motion.article
@@ -811,10 +819,17 @@ function ProjectCard({ project }: { project: Project }) {
             {project.url}
           </span>
         </div>
-        <ProjectPreview
-          gradient={project.gradient}
-          image={project.image}
-        />
+        <button
+          type="button"
+          onClick={onOpen}
+          aria-label={project.title}
+          className="block w-full cursor-zoom-in text-left"
+        >
+          <ProjectPreview
+            gradient={project.gradient}
+            image={project.image}
+          />
+        </button>
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-6">
@@ -861,6 +876,14 @@ function ProjectCard({ project }: { project: Project }) {
               {t("proj.source")}
             </a>
           )}
+          <button
+            type="button"
+            onClick={onOpen}
+            className="ml-auto inline-flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary"
+          >
+            {t("proj.details")}
+            <ArrowUpRight className="size-4" />
+          </button>
         </div>
       </div>
     </motion.article>
@@ -870,6 +893,7 @@ function ProjectCard({ project }: { project: Project }) {
 function Projects() {
   const { t } = useI18n();
   const [filter, setFilter] = useState<Filter>("All");
+  const [active, setActive] = useState<Project | null>(null);
   const filtered = PROJECTS.filter(
     (p) => filter === "All" || p.category === filter,
   );
@@ -904,7 +928,11 @@ function Projects() {
         <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onOpen={() => setActive(project)}
+              />
             ))}
           </AnimatePresence>
         </motion.div>
@@ -918,7 +946,182 @@ function Projects() {
           </Button>
         </Reveal>
       </div>
+
+      <AnimatePresence>
+        {active && (
+          <ProjectModal project={active} onClose={() => setActive(null)} />
+        )}
+      </AnimatePresence>
     </section>
+  );
+}
+
+function ProjectModal({
+  project,
+  onClose,
+}: {
+  project: Project;
+  onClose: () => void;
+}) {
+  const { t, pick } = useI18n();
+  const gallery = project.gallery?.length
+    ? project.gallery
+    : project.image
+      ? [project.image]
+      : [];
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    setIdx(0);
+  }, [project.id]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") setIdx((i) => Math.min(i + 1, gallery.length - 1));
+      if (e.key === "ArrowLeft") setIdx((i) => Math.max(i - 1, 0));
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose, gallery.length]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        role="dialog"
+        aria-modal="true"
+        aria-label={project.title}
+        className="relative w-full max-w-2xl overflow-hidden rounded-2xl border bg-card shadow-2xl"
+        initial={{ opacity: 0, scale: 0.95, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 16 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          autoFocus
+          aria-label="Close"
+          className="absolute right-3 top-3 z-10 grid size-8 place-items-center rounded-full border bg-background/90 text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <X className="size-4" />
+        </button>
+
+        <div className="max-h-[85vh] overflow-y-auto">
+          <div className="relative border-b bg-muted/40">
+            <AnimatePresence initial={false} mode="popLayout">
+              <motion.img
+                key={gallery[idx] ?? project.id}
+                src={gallery[idx]}
+                alt={`${project.title} screenshot ${idx + 1}`}
+                loading={idx === 0 ? "eager" : "lazy"}
+                draggable={false}
+                drag={gallery.length > 1 ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.15}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -60) setIdx((i) => Math.min(i + 1, gallery.length - 1));
+                  else if (info.offset.x > 60) setIdx((i) => Math.max(i - 1, 0));
+                }}
+                initial={{ opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="aspect-[16/10] w-full cursor-grab object-cover active:cursor-grabbing"
+              />
+            </AnimatePresence>
+
+            {gallery.length > 1 && (
+              <>
+                {idx > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setIdx((i) => i - 1)}
+                    aria-label="Previous screenshot"
+                    className="absolute left-3 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                  >
+                    <ArrowLeft className="size-4" />
+                  </button>
+                )}
+                {idx < gallery.length - 1 && (
+                  <button
+                    type="button"
+                    onClick={() => setIdx((i) => i + 1)}
+                    aria-label="Next screenshot"
+                    className="absolute right-3 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                  >
+                    <ArrowRight className="size-4" />
+                  </button>
+                )}
+                <span className="absolute bottom-3 right-3 rounded-full bg-black/50 px-2 py-0.5 font-mono text-[11px] text-white backdrop-blur-sm">
+                  {idx + 1} / {gallery.length}
+                </span>
+              </>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-3 p-6">
+            <div className="flex items-center justify-between gap-2">
+              <Badge variant="secondary" className={cn("rounded-full border", project.chip)}>
+                {project.category}
+              </Badge>
+              <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
+            </div>
+            <h3 className="text-xl font-semibold tracking-tight">{project.title}</h3>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {pick(project.description)}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-md border bg-muted/40 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            {(project.links?.live || project.links?.source) && (
+              <div className="mt-1 flex flex-wrap items-center gap-4 border-t pt-4">
+                {project.links?.live && (
+                  <a
+                    href={project.links.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary"
+                  >
+                    {t("proj.live")}
+                    <ArrowUpRight className="size-4" />
+                  </a>
+                )}
+                {project.links?.source && (
+                  <a
+                    href={project.links.source}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    <Github className="size-4" />
+                    {t("proj.source")}
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -1372,6 +1575,22 @@ function Footer() {
   );
 }
 
+/* ------------------------------- whatsapp cta ------------------------------ */
+
+function WhatsAppCta() {
+  return (
+    <a
+      href="https://wa.me/6282235769474?text=Hi%20Hafizh%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Chat on WhatsApp"
+      className="fixed bottom-5 right-5 z-40 grid size-12 place-items-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/25 transition-transform hover:scale-110 motion-reduce:transition-none"
+    >
+      <MessageCircle className="size-6 fill-current" />
+    </a>
+  );
+}
+
 /* ---------------------------------- landing -------------------------------- */
 
 export default function Landing() {
@@ -1416,6 +1635,7 @@ export default function Landing() {
             <Contact />
           </main>
           <Footer />
+          <WhatsAppCta />
         </div>
       </MotionConfig>
     </I18nContext.Provider>

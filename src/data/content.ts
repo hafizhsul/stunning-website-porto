@@ -42,6 +42,7 @@ export const EN_STRINGS = {
     "Projects I've worked on: from procurement websites and radiation monitoring systems to mobile apps.",
   "proj.live": "Live demo",
   "proj.source": "Source",
+  "proj.details": "Details",
   "proj.more": "View more on GitHub",
   "about.eyebrow": "About",
   "about.title": "Two sides that complete each other.",
@@ -107,6 +108,7 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
     "Proyek yang pernah dikerjakan: dari web procurement, sistem monitoring radiasi, sampai aplikasi mobile.",
   "proj.live": "Demo langsung",
   "proj.source": "Sumber",
+  "proj.details": "Detail",
   "proj.more": "Lihat lainnya di GitHub",
   "about.eyebrow": "Tentang",
   "about.title": "Dua sisi yang saling melengkapi.",
@@ -203,6 +205,7 @@ export interface Project {
   chip: string;
   gradient: string;
   image?: string;
+  gallery?: string[];
   links?: { live?: string; source?: string };
 }
 
@@ -240,6 +243,11 @@ export const PROJECTS: Project[] = [
     chip: "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20",
     gradient: "from-sky-500/15 via-sky-500/5 to-transparent",
     image: "/inka/Screenshot_20260803_110422.webp",
+    gallery: [
+      "/inka/Screenshot_20260803_110422.webp",
+      "/inka/Screenshot_20260803_110435.webp",
+      "/inka/Screenshot_20260803_111156.webp",
+    ],
   },
   {
     id: "monitorrad",

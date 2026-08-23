@@ -29,3 +29,7 @@ AGENTS.md
 *.njsproj
 *.sln
 *.sw?
+
+# agent/test artifacts
+.omo/
+.playwright-mcp/
