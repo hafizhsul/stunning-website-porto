@@ -329,6 +329,31 @@ export const PROJECTS: Project[] = [
     ],
     links: { source: "https://github.com/hafizhsul/interval-fit" },
   },
+  {
+    id: "saku",
+    title: "Saku",
+    category: "Mobile",
+    year: "2026",
+    description: {
+      en: "Calm personal finance tracker: record income & expenses, monthly budgets, and automatic recurring transactions. Offline-first, data stays on device.",
+      id: "Aplikasi catatan keuangan pribadi yang tenang: catat pemasukan & pengeluaran, anggaran bulanan, dan transaksi berulang otomatis. Offline-first, data tersimpan di perangkat.",
+    },
+    tags: ["React Native", "Expo", "TypeScript"],
+    url: "github.com/hafizhsul/saku",
+    chip: "bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20",
+    gradient: "from-teal-500/15 via-teal-500/5 to-transparent",
+    image: "/saku/preview.webp",
+    gallery: [
+      "/saku/preview.webp",
+      "/saku/2026-08-23_20-43.webp",
+      "/saku/2026-08-23_20-44.webp",
+      "/saku/2026-08-23_20-44_1.webp",
+      "/saku/2026-08-23_20-44_2.webp",
+      "/saku/2026-08-23_20-44_3.webp",
+      "/saku/2026-08-23_20-44_4.webp",
+    ],
+    links: { source: "https://github.com/hafizhsul/saku" },
+  },
 ];
 
 export const EXPERIENCE = [
