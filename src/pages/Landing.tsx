@@ -49,7 +49,7 @@ const EN_STRINGS = {
   "nav.hire": "Hire me",
   "hero.badge": "Available for new projects",
   "hero.lede":
-    "I'm Hafizh — an Information Technology graduate with hands-on experience in troubleshooting, installing, and configuring systems: across IoT projects, application development, and field operations.",
+    "I'm Hafizh, an Information Technology graduate with hands-on experience in troubleshooting, installing, and configuring systems: across IoT projects, application development, and field operations.",
   "hero.cta1": "View my work",
   "hero.cta2": "Get in touch",
   "hero.stat1": "Years experience",
@@ -60,7 +60,7 @@ const EN_STRINGS = {
   "proj.eyebrow": "Selected work",
   "proj.title": "Projects I'm proud of",
   "proj.desc":
-    "Projects I've worked on — from procurement websites and radiation monitoring systems to mobile apps.",
+    "Projects I've worked on: from procurement websites and radiation monitoring systems to mobile apps.",
   "proj.live": "Live demo",
   "proj.source": "Source",
   "proj.more": "View more on GitHub",
@@ -71,7 +71,7 @@ const EN_STRINGS = {
   "about.p2":
     "On the other side, I also build software: from local-government administration systems with Laravel, internal dashboards with Symfony, to Android mobile apps. This combination makes me comfortable in roles that need fast troubleshooting as well as deeper technical understanding.",
   "about.edu": "Education",
-  "about.edu1": "Associate's Degree in Information Technology — Politeknik Negeri Madiun",
+  "about.edu1": "Associate's Degree in Information Technology, Politeknik Negeri Madiun",
   "about.edu2": "2021–2024 · GPA 3.67/4.00 · MSIB Batch 6",
   "about.resume": "Résumé",
   "about.location": "East Java, Indonesia",
@@ -82,18 +82,18 @@ const EN_STRINGS = {
   "skills.eyebrow": "Toolbox",
   "skills.title": "A stack that ships",
   "skills.desc":
-    "Deep, working knowledge across the whole delivery path — not just résumé keywords.",
+    "Deep, working knowledge across the whole delivery path, not just résumé keywords.",
   "testi.eyebrow": "Kind words",
   "testi.title": "What collaborators say",
   "testi.desc": "I'd rather let the people I've built with do the talking.",
-  "testi.placeholder": "Your testimonial goes here — what was it like working together?",
+  "testi.placeholder": "Your testimonial goes here: what was it like working together?",
   "testi.placeholderName": "Your name",
   "testi.placeholderRole": "Role · Company",
   "contact.badge": "Get in touch",
   "contact.title":
     "Open to IT Support/Helpdesk roles as well as software project collaboration.",
   "contact.desc":
-    "Tell me what you need — from device, network, and system troubleshooting to building applications. I'm happy to help.",
+    "Tell me what you need: from device, network, and system troubleshooting to building applications. I'm happy to help.",
   "contact.resume": "Download résumé",
   "footer.tag":
     "Software engineer crafting fast, reliable, and beautiful digital products from East Java, Indonesia.",
@@ -125,18 +125,18 @@ const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "proj.eyebrow": "Karya pilihan",
   "proj.title": "Proyek pilihan",
   "proj.desc":
-    "Proyek yang pernah dikerjakan — dari web procurement, sistem monitoring radiasi, sampai aplikasi mobile.",
+    "Proyek yang pernah dikerjakan: dari web procurement, sistem monitoring radiasi, sampai aplikasi mobile.",
   "proj.live": "Demo langsung",
   "proj.source": "Sumber",
   "proj.more": "Lihat lainnya di GitHub",
   "about.eyebrow": "Tentang",
   "about.title": "Dua sisi yang saling melengkapi.",
   "about.p1":
-    "Saya memulai karier dengan tangan langsung di lapangan, menangani hardware, jaringan, dan dukungan pengguna di berbagai proyek — mulai dari IoT hingga konstruksi. Dari situ saya terbiasa mendokumentasikan pekerjaan secara terstruktur dan berkoordinasi lintas tim untuk menyelesaikan masalah teknis.",
+    "Saya memulai karier dengan tangan langsung di lapangan, menangani hardware, jaringan, dan dukungan pengguna di berbagai proyek, mulai dari IoT hingga konstruksi. Dari situ saya terbiasa mendokumentasikan pekerjaan secara terstruktur dan berkoordinasi lintas tim untuk menyelesaikan masalah teknis.",
   "about.p2":
     "Di sisi lain, saya juga membangun software: dari sistem administrasi pemerintah daerah dengan Laravel, dashboard internal dengan Symfony, sampai aplikasi mobile Android. Kombinasi ini membuat saya nyaman berada di posisi yang butuh troubleshooting cepat sekaligus pemahaman teknis yang lebih dalam.",
   "about.edu": "Pendidikan",
-  "about.edu1": "D3 Teknologi Informasi — Politeknik Negeri Madiun",
+  "about.edu1": "D3 Teknologi Informasi, Politeknik Negeri Madiun",
   "about.edu2": "2021–2024 · IPK 3.67/4.00 · MSIB Batch 6",
   "about.resume": "Resume",
   "about.location": "Jawa Timur, Indonesia",
@@ -147,18 +147,18 @@ const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "skills.eyebrow": "Perangkat",
   "skills.title": "Kemampuan",
   "skills.desc":
-    "Pengetahuan kerja yang mendalam di seluruh jalur pengiriman — bukan sekadar kata kunci di resume.",
+    "Pengetahuan kerja yang mendalam di seluruh jalur pengiriman, bukan sekadar kata kunci di resume.",
   "testi.eyebrow": "Kata mereka",
   "testi.title": "Apa kata kolaborator",
   "testi.desc": "Biarkan orang-orang yang pernah bekerja sama yang berbicara.",
-  "testi.placeholder": "Testimoni Anda di sini — bagaimana rasanya bekerja sama?",
+  "testi.placeholder": "Testimoni Anda di sini: bagaimana rasanya bekerja sama?",
   "testi.placeholderName": "Nama Anda",
   "testi.placeholderRole": "Peran · Perusahaan",
   "contact.badge": "Hubungi Saya",
   "contact.title":
     "Terbuka untuk peran IT Support/Helpdesk maupun kolaborasi proyek software.",
   "contact.desc":
-    "Ceritakan kebutuhanmu — dari troubleshooting perangkat, jaringan, dan sistem, sampai membangun aplikasi. Saya siap membantu.",
+    "Ceritakan kebutuhanmu: dari troubleshooting perangkat, jaringan, dan sistem, sampai membangun aplikasi. Saya siap membantu.",
   "contact.resume": "Unduh resume",
   "footer.tag":
     "Software engineer yang membuat produk digital cepat, andal, dan indah dari Jawa Timur, Indonesia.",
@@ -240,18 +240,18 @@ interface Project {
   chip: string;
   gradient: string;
   image?: string;
-  links: { live?: string; source: string };
+  links?: { live?: string; source?: string };
 }
 
 const PROJECTS: Project[] = [
   {
     id: "portfolio",
-    title: "Hafizhesbe — Portfolio",
+    title: "Hafizhesbe Portfolio",
     category: "Frontend",
     year: "2026",
     description: {
-      en: "This very portfolio site — a bilingual React single-page site with Framer Motion animations.",
-      id: "Portofolio ini sendiri — situs React satu halaman bilingual dengan animasi Framer Motion.",
+      en: "This very portfolio site: a bilingual React single-page site with Framer Motion animations.",
+      id: "Portofolio ini sendiri, situs React satu halaman bilingual dengan animasi Framer Motion.",
     },
     tags: ["React", "TypeScript", "Tailwind CSS"],
     url: "hafizhesbe.my.id",
@@ -265,7 +265,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "inka-eprocurement",
-    title: "INKA — e-Procurement",
+    title: "INKA e-Procurement",
     category: "Full-stack",
     year: "2023",
     description: {
@@ -277,7 +277,6 @@ const PROJECTS: Project[] = [
     chip: "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20",
     gradient: "from-sky-500/15 via-sky-500/5 to-transparent",
     image: "/inka/Screenshot_20260803_110422.png",
-    links: { source: "https://github.com/hafizhsul" },
   },
   {
     id: "monitorrad",
@@ -309,7 +308,6 @@ const PROJECTS: Project[] = [
     chip: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
     gradient: "from-indigo-500/15 via-indigo-500/5 to-transparent",
     image: "/stuntzilla/preview.png",
-    links: { source: "https://github.com/hafizhsul" },
   },
   {
     id: "intervalfit",
@@ -325,7 +323,7 @@ const PROJECTS: Project[] = [
     chip: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20",
     gradient: "from-rose-500/15 via-rose-500/5 to-transparent",
     image: "/intervalfit/preview.png",
-    links: { source: "https://github.com/hafizhsul" },
+    links: { source: "https://github.com/hafizhsul/interval-fit" },
   },
 ];
 
@@ -1321,7 +1319,7 @@ function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
         <div className="mt-2 flex items-center gap-4 border-t pt-4">
-          {project.links.live && (
+          {project.links?.live && (
             <a
               href={project.links.live}
               target="_blank"
@@ -1332,15 +1330,17 @@ function ProjectCard({ project }: { project: Project }) {
               <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           )}
-          <a
-            href={project.links.source}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <Github className="size-4" />
-            {t("proj.source")}
-          </a>
+          {project.links?.source && (
+            <a
+              href={project.links.source}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Github className="size-4" />
+              {t("proj.source")}
+            </a>
+          )}
         </div>
       </div>
     </motion.article>
