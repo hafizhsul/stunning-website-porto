@@ -362,12 +362,8 @@ function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="group flex items-center gap-2.5 font-semibold tracking-tight">
-          <img
-            src="/logo.svg"
-            alt="HSB"
-            className="size-8 rounded-lg shadow-sm transition-transform group-hover:-rotate-3"
-          />
+        <a href="#top" className="flex items-center font-semibold tracking-tight">
+          <span className="sm:hidden">Hafizh</span>
           <span className="hidden sm:block">Hafizh Sulthan Bachtiyar</span>
         </a>
 

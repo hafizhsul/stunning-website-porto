@@ -26,7 +26,7 @@ export const EN_STRINGS = {
   "nav.skills": "Skills",
   "nav.contact": "Contact",
   "nav.hire": "Hire me",
-  "hero.badge": "Available for new projects",
+  "hero.badge": "Open to work",
   "hero.lede":
     "I'm Hafizh, an Information Technology graduate with hands-on experience in troubleshooting, installing, and configuring systems: across IoT projects, application development, and field operations.",
   "hero.cta1": "View my work",
