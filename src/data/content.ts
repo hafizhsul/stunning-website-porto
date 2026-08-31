@@ -43,7 +43,7 @@ export const EN_STRINGS = {
   "proj.eyebrow": "Selected work",
   "proj.title": "Projects I'm proud of",
   "proj.desc":
-    "Projects I've worked on: from procurement websites and radiation monitoring systems to mobile apps.",
+    "Projects I've worked on: from procurement websites to mobile apps.",
   "proj.live": "Live demo",
   "proj.source": "Source",
   "proj.details": "Details",
@@ -112,7 +112,7 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "proj.eyebrow": "Karya pilihan",
   "proj.title": "Proyek pilihan",
   "proj.desc":
-    "Proyek yang pernah dikerjakan: dari web procurement, sistem monitoring radiasi, sampai aplikasi mobile.",
+    "Proyek yang pernah dikerjakan: dari web procurement sampai aplikasi mobile.",
   "proj.live": "Demo langsung",
   "proj.source": "Sumber",
   "proj.details": "Detail",
