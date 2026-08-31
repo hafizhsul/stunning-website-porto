@@ -1,52 +1,32 @@
-# Alex Carter — Software Engineer (local rebuild)
+# Hafizh Sulthan Bachtiar — Portfolio
 
-A working local rebuild of the portfolio deployed at
-[`fine-ties-run.freebuff.dev`](https://fine-ties-run.freebuff.dev/), ported from the
-recovered sources (see `REVERSE-ENGINEERING.md` for the extraction story).
+Bilingual (English / Indonesian) single-page developer portfolio built with React, Vite, TypeScript, Tailwind CSS v4, shadcn/ui, and Framer Motion.
 
-## What changed vs. the deployed site
+## Stack
 
-**Kept (ported verbatim from the recovered sourcemaps):**
+- React 19 + Vite (client-side routing via `react-router`)
+- TypeScript, Tailwind CSS v4 (`@tailwindcss/vite`)
+- shadcn/ui primitives (`@radix-ui/*`, `class-variance-authority`, `tailwind-merge`, `clsx`)
+- Framer Motion, `lucide-react`, `sonner`, `next-themes`
 
-- `src/pages/Landing.tsx` — the full one-file portfolio: navbar with scroll-spy,
-  theme toggle, mobile menu, hero with animated code card + floating tech chips,
-  tech marquee, filterable projects grid, about, experience timeline, skills,
-  testimonials, contact, footer. All data (projects, jobs, testimonials) is the
-  original static content.
-- `src/pages/NotFound.tsx` — the deployed 404 page.
-- `src/components/ui/*` — the shadcn primitives used by the pages (button, badge,
-  separator, card, input, sonner toaster).
-- `src/index.css` — the deployed Tailwind output verbatim (theme tokens, dark mode,
-  `animate-marquee` / `animate-float` / `animate-caret` keyframes), so rendering is
-  pixel-identical. It's the compiled stylesheet; if you change class names in the
-  pages, regenerate it from a Tailwind source build or add classes manually.
-- `index.html` — the deployed head (Inter + JetBrains Mono, theme pre-paint script,
-  meta), minus the PWA manifest.
+## Structure
 
-**Dropped (Convex/auth backend):**
-
-- Convex (`@convex-dev/auth`), the `/dashboard` route, `RequireAuth`, and the
-  `useAuth` hook are gone.
-- `/auth` is a design-faithful stub: same card (email + OTP prompt + "Continue as
-  Guest"), but submitting shows a toast + inline notice that sign-in is disabled in
-  this rebuild — there is no backend to verify against.
-- VlyToolbar / `@vly-ai/integrations`, the iframe route-syncer, and the runtime
-  error reporter were removed (platform plumbing only).
+- `src/pages/Landing.tsx` — the full one-file portfolio: navbar (scroll-spy, theme toggle, mobile menu), hero with animated code card, tech marquee, filterable projects grid, about, experience timeline, skills, testimonials, contact, footer.
+- `src/pages/NotFound.tsx` — 404 page.
+- `src/data/content.ts` — all content and i18n strings (EN/ID); projects, experience, skills, testimonials, facts, socials. The portfolio is data-driven — edit here to change content.
+- `src/components/ui/*` — shadcn primitives (button, badge, card, input, separator, sonner).
+- `public/<project>/` — per-project preview screenshots (router-watch, inka, intervalfit, saku, stuntzilla).
 
 ## Run it
 
 ```bash
 npm install   # already installed
-npm run dev   # http://localhost:5173 (or the port Vite picks)
+npm run dev   # local dev server (Vite)
 npm run build # tsc -b && vite build
 npm run lint  # oxlint
 ```
 
 ## Notes
 
-- `lucide-react` is pinned to `^0.555.0` (same as the deployed site): 1.x removed the
-  brand icons (Github / Linkedin / Twitter) the design uses.
-- `tsconfig.app.json` adds the `@/` path alias (matching the deployed `vite.config.ts`)
-  and drops `verbatimModuleSyntax` so the ported sources compile exactly as upstream.
-- The previous app in this workspace (a Kai Nakamura portfolio) was moved to
-  `archive-kai-nakamura/` — nothing was deleted.
+- `lucide-react` is pinned to `^0.555.0`: 1.x removed the brand icons (GitHub / LinkedIn / Twitter) the design uses.
+- `tsconfig.app.json` adds the `@/` path alias.
