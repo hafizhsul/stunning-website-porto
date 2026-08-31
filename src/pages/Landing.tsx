@@ -28,6 +28,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { MarqueeDemo } from "@/components/marquee-demo";
 import {
   EXPERIENCE,
   FACTS,
@@ -37,7 +38,6 @@ import {
   SKILL_GROUPS,
   SOCIALS,
   STRINGS,
-  TECH,
   TESTIMONIALS,
   VALUES,
   resolve,
@@ -725,7 +725,7 @@ function Hero() {
 
 /* --------------------------------- marquee --------------------------------- */
 
-function Marquee() {
+function TechMarquee() {
   const { t } = useI18n();
   return (
     <section className="border-y bg-muted/40 py-10">
@@ -733,25 +733,7 @@ function Marquee() {
         {t("marquee.title")}
       </p>
       <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-        <div className="animate-marquee flex w-max">
-          {[0, 1].map((half) => (
-            <div
-              key={half}
-              aria-hidden={half === 1}
-              className="flex shrink-0 items-center gap-12 pr-12"
-            >
-              {TECH.map((t) => (
-                <span
-                  key={t}
-                  className="flex items-center gap-12 text-sm font-medium text-foreground/60"
-                >
-                  <span className="whitespace-nowrap">{t}</span>
-                  <span className="size-1.5 rounded-full bg-primary/30" />
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
+        <MarqueeDemo className="mt-0 sm:mt-0" />
       </div>
     </section>
   );
@@ -1592,7 +1574,7 @@ export default function Landing() {
           <Navbar />
           <main>
             <Hero />
-            <Marquee />
+            <TechMarquee />
             <Projects />
             <About />
             <Experience />
