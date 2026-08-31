@@ -517,9 +517,9 @@ function Hero() {
           </Badge>
 
           <h1 className="text-balance text-[2.6rem] font-semibold leading-[1.06] tracking-tight sm:text-6xl lg:text-[4.1rem]">
-            Software engineer crafting{" "}
+            {t("hero.h1.pre")}{" "}
             <span className="relative inline-block whitespace-nowrap">
-              <span className="text-primary">digital products</span>
+              <span className="text-primary">{t("hero.h1.highlight")}</span>
               <svg
                 className="absolute -bottom-2 left-0 h-2.5 w-full text-primary"
                 viewBox="0 0 220 12"
@@ -536,7 +536,7 @@ function Hero() {
                 />
               </svg>
             </span>{" "}
-            people love to use.
+            {t("hero.h1.post")}
           </h1>
 
           <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">

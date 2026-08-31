@@ -28,6 +28,9 @@ export const EN_STRINGS = {
   "nav.contact": "Contact",
   "nav.hire": "Hire me",
   "hero.badge": "Open to work",
+  "hero.h1.pre": "Software engineer crafting",
+  "hero.h1.highlight": "digital products",
+  "hero.h1.post": "people love to use.",
   "hero.lede":
     "I'm Hafizh, an Information Technology graduate with hands-on experience in troubleshooting, installing, and configuring systems: across IoT projects, application development, and field operations.",
   "hero.cta1": "View my work",
@@ -94,6 +97,9 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "nav.contact": "Kontak",
   "nav.hire": "Hubungi Saya",
   "hero.badge": "Terbuka untuk peluang baru",
+  "hero.h1.pre": "Software engineer yang membuat",
+  "hero.h1.highlight": "produk digital",
+  "hero.h1.post": "yang disukai banyak orang.",
   "hero.lede":
     "Lulusan D3 Teknologi Informasi dengan pengalaman langsung menangani troubleshooting, instalasi, dan konfigurasi sistem: dari proyek IoT, pengembangan aplikasi, sampai operasional lapangan.",
   "hero.cta1": "Lihat karyaku",
