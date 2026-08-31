@@ -11,7 +11,6 @@ import {
   Heart,
   Hexagon,
   Mail,
-  MapPin,
   Menu,
   MessageCircle,
   Moon,
@@ -706,7 +705,7 @@ function Hero() {
           {/* overlapping profile card */}
           <div className="absolute -bottom-1 left-2 flex items-center gap-3 rounded-2xl border bg-card p-3.5 shadow-xl shadow-primary/10 sm:-left-4">
             <img
-              src="/portrait.jpg"
+              src="/portrait.png"
               alt="Hafizh Sulthan Bachtiyar"
               className="size-10 rounded-full object-cover"
             />
@@ -1131,53 +1130,12 @@ function About() {
         <Reveal>
           <div className="relative mx-auto w-full max-w-sm">
             <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-transparent blur-xl" />
-            <div className="relative rounded-3xl border bg-card p-6 shadow-xl shadow-primary/5">
-              <div className="flex items-start justify-between gap-3">
-                <img
-                  src="/portrait.jpg"
-                  alt="Hafizh Sulthan Bachtiyar"
-                  className="size-20 rounded-2xl border object-cover shadow-md"
-                />
-                <Badge className="gap-1.5 rounded-full">
-                  <span className="size-1.5 rounded-full bg-emerald-400" />
-                  {t("hero.status")}
-                </Badge>
-              </div>
-              <div className="mt-5">
-                <h3 className="text-lg font-semibold tracking-tight">Hafizh Sulthan Bachtiyar</h3>
-                <p className="text-sm text-muted-foreground">IT Support & Software Developer</p>
-              </div>
-              <div className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <p className="flex items-center gap-2">
-                  <MapPin className="size-4 shrink-0 text-foreground/50" />
-                  {t("about.location")}
-                </p>
-                <p className="flex items-center gap-2">
-                  <Mail className="size-4 shrink-0 text-foreground/50" />
-                  hafizhbachtiyar123@gmail.com
-                </p>
-              </div>
-              <Separator className="my-5" />
-              <div className="flex items-center gap-2">
-                {SOCIALS.slice(0, 3).map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={s.label}
-                    className="grid size-9 shrink-0 place-items-center rounded-md border text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary"
-                  >
-                    <s.icon className="size-4" />
-                  </a>
-                ))}
-                <Button asChild variant="outline" size="sm" className="ml-auto">
-                  <a href="/resume.pdf" download>
-                    <Download className="size-4" />
-                    {t("about.resume")}
-                  </a>
-                </Button>
-              </div>
+            <div className="relative overflow-hidden rounded-3xl border bg-card shadow-xl shadow-primary/5">
+              <img
+                src="/portrait.png"
+                alt="Hafizh Sulthan Bachtiyar"
+                className="aspect-[4/3] w-full object-cover"
+              />
             </div>
           </div>
         </Reveal>
@@ -1212,22 +1170,34 @@ function About() {
           </Reveal>
 
           <Reveal delay={0.16} className="mt-8 grid gap-4 sm:grid-cols-2">
-            {FACTS.map((f, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-3 rounded-xl border bg-card p-3.5"
-              >
-                <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
-                  <f.icon className="size-4" />
-                </span>
-                <span>
-                  <span className="block text-[11px] uppercase tracking-wider text-muted-foreground">
-                    {pick(f.label)}
+            {FACTS.map((f, i) => {
+              const inner = (
+                <>
+                  <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+                    <f.icon className="size-4" />
                   </span>
-                  <span className="block text-sm font-medium">{pick(f.value)}</span>
-                </span>
-              </div>
-            ))}
+                  <span>
+                    <span className="block text-[11px] uppercase tracking-wider text-muted-foreground">
+                      {pick(f.label)}
+                    </span>
+                    <span className="block text-sm font-medium">{pick(f.value)}</span>
+                  </span>
+                </>
+              );
+              const cardClass =
+                "flex items-center gap-3 rounded-xl border bg-card p-3.5 transition-colors hover:border-primary/40 hover:text-primary";
+              return (
+                <div key={i}>
+                  {f.href ? (
+                    <a href={f.href} target="_blank" rel="noreferrer" className={cardClass}>
+                      {inner}
+                    </a>
+                  ) : (
+                    <div className={cardClass}>{inner}</div>
+                  )}
+                </div>
+              );
+            })}
           </Reveal>
 
           <Reveal delay={0.24}>

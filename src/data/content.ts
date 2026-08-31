@@ -9,6 +9,7 @@ import {
   Server,
   Sparkles,
   Wrench,
+  type LucideIcon,
 } from "lucide-react";
 
 /* ---------------------------------- i18n ---------------------------------- */
@@ -211,22 +212,22 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    id: "portfolio",
-    title: "Hafizhesbe Portfolio",
+    id: "router-watch",
+    title: "Router Watch",
     category: "Frontend",
     year: "2026",
     description: {
-      en: "This very portfolio site: a bilingual React single-page site with Framer Motion animations.",
-      id: "Portofolio ini sendiri, situs React satu halaman bilingual dengan animasi Framer Motion.",
+      en: "A directory of AI API gateways that hand out free signup credit, with model lists sourced from each gateway's live /v1/models endpoint. Static site, no backend.",
+      id: "Direktori AI API gateway yang memberikan kredit gratis saat signup, dengan daftar model dari endpoint /v1/models tiap gateway. Static site, tanpa backend.",
     },
-    tags: ["React", "TypeScript", "Tailwind CSS"],
-    url: "hafizhesbe.my.id",
-    chip: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20",
-    gradient: "from-violet-500/15 via-violet-500/5 to-transparent",
-    image: "/porto/preview.webp",
+    tags: ["JavaScript", "Vite", "i18n"],
+    url: "router-watch.vercel.app",
+    chip: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20",
+    gradient: "from-cyan-500/15 via-cyan-500/5 to-transparent",
+    image: "/router-watch/preview.png",
     links: {
-      live: "https://hafizhesbe.my.id",
-      source: "https://github.com/hafizhsul",
+      live: "https://router-watch.vercel.app",
+      source: "https://github.com/hafizhsul/router-watch",
     },
   },
   {
@@ -248,31 +249,6 @@ export const PROJECTS: Project[] = [
       "/inka/Screenshot_20260803_110435.webp",
       "/inka/Screenshot_20260803_111156.webp",
     ],
-  },
-  {
-    id: "monitorrad",
-    title: "MonitorRad",
-    category: "Full-stack",
-    year: "2024",
-    description: {
-      en: "B3 radiation monitoring website with Telegram bot early warning system.",
-      id: "Website monitoring radiasi B3 dengan sistem early warning via Telegram bot.",
-    },
-    tags: ["Laravel", "Telegram Bot", "IoT"],
-    url: "github.com/hafizhsul/MonitorRad",
-    chip: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
-    gradient: "from-emerald-500/15 via-emerald-500/5 to-transparent",
-    image: "/radmonitor/preview.webp",
-    gallery: [
-      "/radmonitor/preview.webp",
-      "/radmonitor/Screenshot_20260803_111014.webp",
-      "/radmonitor/Screenshot_20260803_111032.webp",
-      "/radmonitor/Screenshot_20260803_111048.webp",
-      "/radmonitor/Screenshot_20260803_111055.webp",
-      "/radmonitor/Screenshot_20260803_111102.webp",
-      "/radmonitor/Screenshot_20260803_111117.webp",
-    ],
-    links: { source: "https://github.com/hafizhsul/MonitorRad" },
   },
   {
     id: "stuntzilla",
@@ -511,13 +487,25 @@ export const SKILL_GROUPS = [
   },
 ];
 
-export const FACTS = [
+type Fact = {
+  icon: LucideIcon;
+  label: Localized;
+  value: Localized;
+  href?: string;
+};
+
+export const FACTS: Fact[] = [
   {
     icon: MapPin,
     label: { en: "Location", id: "Lokasi" },
     value: { en: "East Java, Indonesia", id: "Jawa Timur, Indonesia" },
   },
-  { icon: Mail, label: "Email", value: "hafizhbachtiyar123@gmail.com" },
+  {
+    icon: Github,
+    label: { en: "GitHub", id: "GitHub" },
+    value: "@hafizhsul",
+    href: "https://github.com/hafizhsul",
+  },
   { icon: Braces, label: { en: "Focus", id: "Fokus" }, value: "IT Support & Software Dev" },
   {
     icon: Sparkles,
