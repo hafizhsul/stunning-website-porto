@@ -596,12 +596,17 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-md pb-10 lg:max-w-none"
         >
+          {/* glow */}
+          <div
+            aria-hidden
+            className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-transparent blur-2xl"
+          />
           {/* code card */}
-          <div className="relative overflow-hidden rounded-2xl border bg-card/80 shadow-2xl shadow-primary/10 backdrop-blur">
+          <div className="relative overflow-hidden rounded-2xl border bg-card/80 shadow-2xl shadow-primary/15 backdrop-blur ring-1 ring-white/5">
             <div className="flex items-center gap-2 border-b bg-muted/50 px-4 py-3">
-              <span className="size-2.5 rounded-full bg-border" />
-              <span className="size-2.5 rounded-full bg-border" />
-              <span className="size-2.5 rounded-full bg-border" />
+              <span className="size-2.5 rounded-full bg-red-400/80" />
+              <span className="size-2.5 rounded-full bg-yellow-400/80" />
+              <span className="size-2.5 rounded-full bg-green-400/80" />
               <span className="ml-3 flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
                 <Terminal className="size-3.5" />
                 developer.ts
@@ -629,7 +634,7 @@ function Hero() {
                 <span className="text-sky-600 dark:text-sky-400">role</span>
                 <span className="text-foreground/70">:</span>{" "}
                 <span className="text-emerald-600 dark:text-emerald-400">
-                  "IT Support & Software Developer"
+                  "Software Engineer"
                 </span>
                 <span className="text-foreground/70">,</span>
               </p>
@@ -646,12 +651,16 @@ function Hero() {
                 <span className="text-foreground/70">:</span>{" "}
                 <span className="text-foreground/70">[</span>
                 <span className="text-emerald-600 dark:text-emerald-400">
-                  "PHP"
+                  "Laravel"
                 </span>
                 <span className="text-foreground/70">,</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">"Laravel"</span>
+                <span className="text-emerald-600 dark:text-emerald-400">"Symfony"</span>
                 <span className="text-foreground/70">,</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">"Kotlin"</span>
+                <span className="text-emerald-600 dark:text-emerald-400">"React"</span>
+                <span className="text-foreground/70">,</span>{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">"TypeScript"</span>
+                <span className="text-foreground/70">,</span>{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">"Android"</span>
                 <span className="text-foreground/70">]</span>
                 <span className="text-foreground/70">,</span>
               </p>
