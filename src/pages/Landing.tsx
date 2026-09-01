@@ -1110,7 +1110,7 @@ function About() {
     <section id="about" className="border-t bg-muted/30 py-24 sm:py-28">
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <Reveal>
-          <div className="relative mx-auto w-full max-w-sm">
+          <div className="relative mx-auto w-full max-w-md">
             <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-transparent blur-xl" />
             <div className="relative overflow-hidden rounded-3xl border bg-card shadow-xl shadow-primary/5">
               <img
@@ -1135,9 +1135,6 @@ function About() {
           <Reveal delay={0.08}>
             <p className="mt-5 text-pretty leading-relaxed text-muted-foreground">
               {t("about.p1")}
-            </p>
-            <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
-              {t("about.p2")}
             </p>
           </Reveal>
 

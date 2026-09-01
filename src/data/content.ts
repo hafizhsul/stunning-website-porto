@@ -51,9 +51,8 @@ export const EN_STRINGS = {
   "about.eyebrow": "About",
   "about.title": "Two sides that complete each other.",
   "about.p1":
-    "I started my career hands-on in the field, handling hardware, networking, and user support across projects ranging from IoT to construction. That's where I learned to document work in a structured way and coordinate across teams to resolve technical issues.",
-  "about.p2":
-    "On the other side, I also build software: from local-government administration systems with Laravel, internal dashboards with Symfony, to Android mobile apps. This combination makes me comfortable in roles that need fast troubleshooting as well as deeper technical understanding.",
+    "I work hands-on in the field: hardware, networking, user support, from IoT to construction, and I build software too: Laravel, Symfony, and Android apps. I bring structured documentation, cross-team coordination, fast troubleshooting, and a deeper technical understanding.",
+  "about.p2": "",
   "about.edu": "Education",
   "about.edu1": "Associate's Degree in Information Technology, Politeknik Negeri Madiun",
   "about.edu2": "2021–2024 · GPA 3.67/4.00 · MSIB Batch 6",
@@ -120,9 +119,8 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "about.eyebrow": "Tentang",
   "about.title": "Dua sisi yang saling melengkapi.",
   "about.p1":
-    "Saya memulai karier dengan tangan langsung di lapangan, menangani hardware, jaringan, dan dukungan pengguna di berbagai proyek, mulai dari IoT hingga konstruksi. Dari situ saya terbiasa mendokumentasikan pekerjaan secara terstruktur dan berkoordinasi lintas tim untuk menyelesaikan masalah teknis.",
-  "about.p2":
-    "Di sisi lain, saya juga membangun software: dari sistem administrasi pemerintah daerah dengan Laravel, dashboard internal dengan Symfony, sampai aplikasi mobile Android. Kombinasi ini membuat saya nyaman berada di posisi yang butuh troubleshooting cepat sekaligus pemahaman teknis yang lebih dalam.",
+    "Saya bekerja langsung di lapangan: hardware, jaringan, dukungan pengguna, dari IoT sampai konstruksi, dan saya juga membangun software: Laravel, Symfony, dan aplikasi Android. Saya membawa dokumentasi terstruktur, koordinasi lintas tim, troubleshooting cepat, dan pemahaman teknis yang lebih dalam.",
+  "about.p2": "",
   "about.edu": "Pendidikan",
   "about.edu1": "D3 Teknologi Informasi, Politeknik Negeri Madiun",
   "about.edu2": "2021–2024 · IPK 3.67/4.00 · MSIB Batch 6",
