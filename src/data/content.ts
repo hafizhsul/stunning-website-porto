@@ -62,6 +62,8 @@ export const EN_STRINGS = {
   "exp.title": "Where I've worked",
   "exp.desc":
     "A track record of shipping meaningful products and raising the bar for the teams around me.",
+  "exp.lede": "Five roles from field support to software engineering: a mix of hands-on operations and shipped products.",
+  "exp.now": "Now",
   "skills.eyebrow": "Toolbox",
   "skills.title": "A stack that ships",
   "skills.desc":
@@ -130,6 +132,8 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "exp.title": "Riwayat kerja",
   "exp.desc":
     "Urut dari yang terbaru: kombinasi peran operasional/IT support dan pengembangan software.",
+  "exp.lede": "Lima peran dari dukungan lapangan hingga software engineering: perpaduan operasi hands-on dan produk yang dirilis.",
+  "exp.now": "Sekarang",
   "skills.eyebrow": "Perangkat",
   "skills.title": "Kemampuan",
   "skills.desc":

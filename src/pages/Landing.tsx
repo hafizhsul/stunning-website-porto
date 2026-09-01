@@ -1209,50 +1209,41 @@ function Experience() {
         />
 
         <div className="mx-auto max-w-3xl">
-          <ol className="relative space-y-10 border-l border-border/70 pl-8">
-            {EXPERIENCE.map((job, i) => (
-              <li key={job.company} className="relative">
-                <span className="absolute -left-11 top-8 grid size-6 place-items-center rounded-full border bg-background shadow-sm">
-                  <span className="size-2 rounded-full bg-primary" />
-                </span>
-                <Reveal delay={i * 0.06}>
-                <div className="group rounded-2xl border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="rounded-full bg-primary/10 px-2.5 py-1 font-mono text-xs font-medium text-primary">
-                      {pick(job.period)}
-                    </span>
-                    <span className="text-xs text-muted-foreground">{pick(job.location)}</span>
+          <p className="mb-8 text-pretty text-sm leading-relaxed text-muted-foreground">
+            {t("exp.lede")}
+          </p>
+          <ul className="divide-y divide-border/70 rounded-2xl border bg-card/40 px-6 sm:px-8">
+            {EXPERIENCE.map((job, i) => {
+              const isCurrent = i === 0;
+              return (
+                <li
+                  key={job.company}
+                  aria-current={isCurrent ? "true" : undefined}
+                  className="flex flex-col gap-1 py-5 transition-colors hover:bg-muted/30 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-6"
+                >
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                      <h3 className="font-semibold tracking-tight text-foreground">
+                        {job.company}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">{pick(job.role)}</p>
+                      {isCurrent && (
+                        <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                          {t("exp.now")}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-0.5 text-xs text-muted-foreground/80">
+                      {pick(job.location)}
+                    </p>
                   </div>
-                  <h3 className="mt-3 text-lg font-semibold tracking-tight">
-                    {pick(job.role)}
-                    <span className="text-muted-foreground"> · {job.company}</span>
-                  </h3>
-                  <ul className="mt-3 space-y-2">
-                    {job.points.map((point, i) => (
-                      <li
-                        key={i}
-                        className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
-                      >
-                        <span className="mt-2 size-1 shrink-0 rounded-full bg-primary/50" />
-                        {pick(point)}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {job.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="rounded-md border bg-muted/40 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
-                      >
-                        {pick(tag)}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
+                  <span className="shrink-0 font-mono text-sm tabular-nums text-muted-foreground sm:text-right">
+                    {pick(job.period)}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </section>
