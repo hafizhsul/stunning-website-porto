@@ -263,3 +263,42 @@
 .page-bg {
   background: var(--background);
 }
+
+/* ---------- Shine border on hover (dillionverma ShineBorder pattern) ---------- */
+@property --shine-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.shine-card {
+  position: relative;
+}
+.shine-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--shine-angle),
+    transparent 25%,
+    var(--primary) 50%,
+    transparent 75%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: shine-rotate 5s linear infinite;
+  pointer-events: none;
+}
+.shine-card:hover::before {
+  opacity: 1;
+}
+@keyframes shine-rotate {
+  to {
+    --shine-angle: 360deg;
+  }
+}
