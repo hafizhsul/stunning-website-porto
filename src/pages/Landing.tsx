@@ -1197,6 +1197,14 @@ function About() {
 
 /* -------------------------------- experience ------------------------------- */
 
+function companyInitials(name: string) {
+  const legal = /\b(CV|PT|Co|Ltd|Inc|LLC|Persero|GmbH|Sarl|Academy|Acad)\b/gi;
+  const words = name.replace(legal, "").split(/\s+/).filter(Boolean);
+  if (words.length === 0) return "•";
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+  return words.slice(0, 2).map((w) => w[0]).join("").toUpperCase();
+}
+
 function Experience() {
   const { t, pick } = useI18n();
   return (
@@ -1208,52 +1216,80 @@ function Experience() {
           description={t("exp.desc")}
         />
 
-        <div className="mx-auto max-w-3xl">
-          <ol className="relative space-y-10 border-l border-border/70 pl-8">
-            {EXPERIENCE.map((job, i) => (
-              <li key={job.company} className="relative">
-                <span className="absolute -left-11 top-8 grid size-6 place-items-center rounded-full border bg-background shadow-sm">
-                  <span className="size-2 rounded-full bg-primary" />
+        <ol className="relative mx-auto mt-12 max-w-3xl border-l border-border/70 pl-8">
+          {EXPERIENCE.map((job, i) => {
+            const isCurrent = i === 0;
+            return (
+              <li
+                key={job.company}
+                aria-current={isCurrent ? "true" : undefined}
+                className="relative pb-10 last:pb-0"
+              >
+                <span
+                  className={`absolute -left-11 top-7 grid size-7 place-items-center rounded-full border bg-background shadow-sm ${
+                    isCurrent
+                      ? "border-primary bg-primary/10 text-primary ring-2 ring-primary/25"
+                      : "border-border text-muted-foreground"
+                  }`}
+                >
+                  <span className="text-[10px] font-bold leading-none">
+                    {companyInitials(job.company)}
+                  </span>
                 </span>
                 <Reveal delay={i * 0.06}>
-                <div className="group rounded-2xl border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="rounded-full bg-primary/10 px-2.5 py-1 font-mono text-xs font-medium text-primary">
-                      {pick(job.period)}
-                    </span>
-                    <span className="text-xs text-muted-foreground">{pick(job.location)}</span>
-                  </div>
-                  <h3 className="mt-3 text-lg font-semibold tracking-tight">
-                    {pick(job.role)}
-                    <span className="text-muted-foreground"> · {job.company}</span>
-                  </h3>
-                  <ul className="mt-3 space-y-2">
-                    {job.points.map((point, i) => (
-                      <li
-                        key={i}
-                        className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
-                      >
-                        <span className="mt-2 size-1 shrink-0 rounded-full bg-primary/50" />
-                        {pick(point)}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {job.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="rounded-md border bg-muted/40 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
-                      >
-                        {pick(tag)}
+                  <div className="md:grid md:grid-cols-[6.5rem_1fr] md:gap-x-8">
+                    <div className="order-2 md:order-none md:pt-1.5 md:text-right">
+                      <span className="inline-flex rounded-full bg-primary/10 px-2.5 py-1 font-mono text-xs font-medium text-primary md:hidden">
+                        {pick(job.period)}
                       </span>
-                    ))}
+                      <span className="hidden font-mono text-xs text-muted-foreground md:inline-block">
+                        {pick(job.period)}
+                      </span>
+                    </div>
+                    <div className="order-1 md:order-none md:pt-0">
+                      <div className="group rounded-2xl border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h3 className="text-lg font-semibold tracking-tight">
+                            {pick(job.role)}
+                          </h3>
+                          {isCurrent && (
+                            <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                              {t("exp.now")}
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          {job.company} · {pick(job.location)}
+                        </p>
+                        <ul className="mt-3 space-y-2">
+                          {job.points.map((point, i) => (
+                            <li
+                              key={i}
+                              className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
+                            >
+                              <span className="mt-2 size-1 shrink-0 rounded-full bg-primary/50" />
+                              {pick(point)}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-4 flex flex-wrap gap-1.5">
+                          {job.tags.map((tag, i) => (
+                            <span
+                              key={i}
+                              className="rounded-md border bg-muted/40 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+                            >
+                              {pick(tag)}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
                 </Reveal>
               </li>
-            ))}
-          </ol>
-        </div>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );
