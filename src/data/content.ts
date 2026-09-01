@@ -60,7 +60,6 @@ export const EN_STRINGS = {
   "about.location": "East Java, Indonesia",
   "exp.eyebrow": "Career",
   "exp.title": "Where I've worked",
-  "exp.now": "Now",
   "exp.desc":
     "A track record of shipping meaningful products and raising the bar for the teams around me.",
   "skills.eyebrow": "Toolbox",
@@ -129,7 +128,6 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "about.location": "Jawa Timur, Indonesia",
   "exp.eyebrow": "Karier",
   "exp.title": "Riwayat kerja",
-  "exp.now": "Sekarang",
   "exp.desc":
     "Urut dari yang terbaru: kombinasi peran operasional/IT support dan pengembangan software.",
   "skills.eyebrow": "Perangkat",
