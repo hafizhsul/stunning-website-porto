@@ -50,7 +50,7 @@ import {
   SiVite,
 } from "react-icons/si";
 import type { ReactNode } from "react";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -228,7 +228,7 @@ function ParallaxBackground() {
 
   return (
     <>
-      <div className="parallax-container" aria-hidden="true">
+      <div className="parallax-container hidden" aria-hidden="true">
         <div className="px-item watermark" data-parallax-speed="0.15">
         <span className="watermark-brand">hafizhesbe.my.id</span>
         <span className="watermark-status">
@@ -266,7 +266,7 @@ function ParallaxBackground() {
     </div>
 
     {/* second layer: faint glyphs drifting at different speeds for depth */}
-    <div className="parallax-container" aria-hidden="true">
+    <div className="parallax-container hidden" aria-hidden="true">
       <span
         className="px-item glyph"
         data-parallax-speed="0.22"
@@ -349,6 +349,38 @@ function ParallaxBackground() {
       </span>
       </div>
     </>
+  );
+}
+
+/* ------------------------------- site background ----------------------------- */
+// Final background: dot pattern (variant B) + mouse-responsive drift parallax.
+// 21st.dev research: /s/background (dot) + /s/parallax (mouse-responsive).
+function SiteBackground() {
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const layers = Array.from(root.querySelectorAll<HTMLElement>(".bg-b"));
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      const nx = (e.clientX / window.innerWidth - 0.5) * 60;
+      const ny = (e.clientY / window.innerHeight - 0.5) * 60;
+      if (!raf) raf = requestAnimationFrame(() => {
+        raf = 0;
+        layers.forEach((el) => (el.style.transform = `translate3d(${nx}px, ${ny}px, 0)`));
+      });
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+
+  return (
+    <div className="site-bg" ref={rootRef} aria-hidden="true">
+      <div className="bg-b" />
+    </div>
   );
 }
 
@@ -1638,6 +1670,7 @@ export default function Landing() {
       <MotionConfig reducedMotion="user">
         <div className="isolate page-bg min-h-screen text-foreground antialiased">
           <ParallaxBackground />
+          <SiteBackground />
           <Navbar />
           <main>
             <Hero />
