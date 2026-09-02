@@ -10,13 +10,16 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  Atom,
   Brain,
+  Braces,
   CheckCircle2,
   Clock,
   Download,
   Github,
   Heart,
   Headphones,
+  Hexagon,
   Mail,
   Menu,
   MessageCircle,
@@ -28,6 +31,7 @@ import {
   Sparkles,
   Sun,
   Tag,
+  Terminal,
   Users,
   Wrench,
   X,
@@ -358,8 +362,39 @@ function Navbar() {
 
 /* ----------------------------------- hero ---------------------------------- */
 
+function TechChip({
+  icon: Icon,
+  label,
+  detail,
+  iconClass,
+  className,
+}: {
+  icon: LucideIcon;
+  label: string;
+  detail: string;
+  iconClass: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "absolute z-20 flex items-center gap-2.5 rounded-xl border bg-card/90 px-3 py-2 shadow-lg shadow-primary/10 backdrop-blur",
+        className,
+      )}
+    >
+      <span className={cn("grid size-8 place-items-center rounded-lg", iconClass)}>
+        <Icon className="size-4" />
+      </span>
+      <span className="text-left">
+        <span className="block text-xs font-semibold leading-none">{label}</span>
+        <span className="mt-1 block text-[10px] text-muted-foreground">{detail}</span>
+      </span>
+    </div>
+  );
+}
+
 function Hero() {
-  const { t, pick } = useI18n();
+  const { t } = useI18n();
   return (
     <section id="top" className="relative overflow-hidden pb-16 pt-24 sm:pb-20 lg:pb-24">
       <div className="mx-auto grid max-w-6xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr]">
@@ -421,48 +456,154 @@ function Hero() {
             </Button>
           </div>
 
+          <div className="mt-8 flex items-center gap-1.5">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={s.label}
+                className="grid size-9 place-items-center rounded-md text-muted-foreground transition-all hover:-translate-y-0.5 hover:text-primary"
+              >
+                <s.icon className="size-[18px]" />
+              </a>
+            ))}
+          </div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 28, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-md lg:max-w-none"
+          className="relative mx-auto w-full max-w-md pb-10 lg:max-w-none"
         >
-          <a
-            href="#skills"
-            className="group block overflow-hidden rounded-2xl border bg-card shadow-2xl shadow-primary/10"
-          >
-            <span className="flex items-center gap-2 border-b bg-muted/50 px-4 py-3">
+          {/* glow */}
+          <div
+            aria-hidden
+            className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-transparent blur-2xl"
+          />
+          {/* code card */}
+          <div className="relative overflow-hidden rounded-2xl border bg-card/80 shadow-2xl shadow-primary/15 backdrop-blur ring-1 ring-white/5">
+            <div className="flex items-center gap-2 border-b bg-muted/50 px-4 py-3">
               <span className="size-2.5 rounded-full bg-red-400/80" />
-              <span className="size-2.5 rounded-full bg-amber-400/80" />
-              <span className="size-2.5 rounded-full bg-emerald-400/80" />
-              <span className="ml-2 font-mono text-xs text-muted-foreground">
-                hafizh@dev:~/skills
+              <span className="size-2.5 rounded-full bg-yellow-400/80" />
+              <span className="size-2.5 rounded-full bg-green-400/80" />
+              <span className="ml-3 flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
+                <Terminal className="size-3.5" />
+                developer.ts
               </span>
-            </span>
-            <span className="block bg-[#0d1117] px-5 py-5 font-mono text-[13px] leading-relaxed text-gray-300">
-              <span className="flex gap-2">
-                <span className="text-emerald-400">$</span>
-                <span className="text-gray-400">skills --list</span>
-              </span>
-              {SKILL_GROUPS.map((group, i) => (
-                <span key={i} className="mt-3 block">
-                  <span className="flex gap-2">
-                    <span className="text-cyan-400">/</span>
-                    <span className="text-cyan-300/90">{pick(group.title)}</span>
-                  </span>
-                  <span className="mt-0.5 block pl-4 text-gray-400">
-                    {group.tags.map((tag) => pick(tag)).join(" \u00b7 ")}
-                  </span>
+            </div>
+            <div className="p-5 font-mono text-[13px] leading-7 sm:p-6">
+              <p>
+                <span className="text-muted-foreground">// hello, world 👋</span>
+              </p>
+              <p>
+                <span className="text-violet-500 dark:text-violet-400">const</span>{" "}
+                <span className="text-sky-600 dark:text-sky-400">developer</span>{" "}
+                <span className="text-foreground/70">=</span>{" "}
+                <span className="text-foreground/70">{"{"}</span>
+              </p>
+              <p className="pl-4">
+                <span className="text-sky-600 dark:text-sky-400">name</span>
+                <span className="text-foreground/70">:</span>{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">
+                  "Hafizh Sulthan Bachtiyar"
                 </span>
-              ))}
-              <span className="mt-4 flex gap-2">
-                <span className="text-emerald-400">$</span>
-                <span className="inline-block h-4 w-2 animate-pulse bg-emerald-400" />
+                <span className="text-foreground/70">,</span>
+              </p>
+              <p className="pl-4">
+                <span className="text-sky-600 dark:text-sky-400">role</span>
+                <span className="text-foreground/70">:</span>{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">
+                  "Software Engineer"
+                </span>
+                <span className="text-foreground/70">,</span>
+              </p>
+              <p className="pl-4">
+                <span className="text-sky-600 dark:text-sky-400">location</span>
+                <span className="text-foreground/70">:</span>{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">
+                  "Jawa Timur, Indonesia"
+                </span>
+                <span className="text-foreground/70">,</span>
+              </p>
+              <p className="pl-4">
+                <span className="text-sky-600 dark:text-sky-400">stack</span>
+                <span className="text-foreground/70">:</span>{" "}
+                <span className="text-foreground/70">[</span>
+                <span className="text-emerald-600 dark:text-emerald-400">"Laravel"</span>
+                <span className="text-foreground/70">,</span>{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">"Symfony"</span>
+                <span className="text-foreground/70">,</span>{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">"React"</span>
+                <span className="text-foreground/70">,</span>{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">"TypeScript"</span>
+                <span className="text-foreground/70">,</span>{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">"Android"</span>
+                <span className="text-foreground/70">]</span>
+                <span className="text-foreground/70">,</span>
+              </p>
+              <p className="pl-4">
+                <span className="text-sky-600 dark:text-sky-400">openToWork</span>
+                <span className="text-foreground/70">:</span>{" "}
+                <span className="text-amber-600 dark:text-amber-400">true</span>
+                <span className="text-foreground/70">,</span>
+              </p>
+              <p>
+                <span className="text-foreground/70">{"};"}</span>
+              </p>
+              <p className="mt-1">
+                <span className="text-violet-500 dark:text-violet-400">await</span>{" "}
+                <span className="text-sky-600 dark:text-sky-400">developer</span>
+                <span className="text-foreground/70">.</span>
+                <span className="text-sky-600 dark:text-sky-400">ship</span>
+                <span className="text-foreground/70">(</span>
+                <span className="text-emerald-600 dark:text-emerald-400">"nextProduct"</span>
+                <span className="text-foreground/70">)</span>
+                <span className="text-foreground/70">;</span>
+                <span className="animate-caret ml-1 inline-block h-4 w-[7px] translate-y-[3px] bg-primary" />
+              </p>
+            </div>
+          </div>
+
+          <TechChip
+            icon={Braces}
+            label="PHP"
+            detail="Backend"
+            iconClass="bg-sky-500/15 text-sky-600 dark:text-sky-400"
+            className="-right-3 -top-5 animate-float sm:-right-6"
+          />
+          <TechChip
+            icon={Atom}
+            label="Laravel"
+            detail="Framework"
+            iconClass="bg-cyan-500/15 text-cyan-600 dark:text-cyan-400"
+            className="-left-3 top-1/3 hidden animate-float-delay sm:flex lg:-left-8"
+          />
+          <TechChip
+            icon={Hexagon}
+            label="Kotlin"
+            detail="Android"
+            iconClass="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+            className="-bottom-4 right-12 hidden animate-float-delay md:flex"
+          />
+
+          {/* overlapping profile card */}
+          <div className="absolute -bottom-1 left-2 flex items-center gap-3 rounded-2xl border bg-card p-3.5 shadow-xl shadow-primary/10 sm:-left-4">
+            <img
+              src="/portrait.png"
+              alt="Hafizh Sulthan Bachtiyar"
+              className="size-10 rounded-full object-cover"
+            />
+            <span>
+              <span className="block text-sm font-semibold leading-none">Hafizh Sulthan Bachtiyar</span>
+              <span className="mt-1.5 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                <span className="size-1.5 rounded-full bg-emerald-500" />
+                {t("hero.status")}
               </span>
             </span>
-          </a>
+          </div>
         </motion.div>
       </div>
     </section>

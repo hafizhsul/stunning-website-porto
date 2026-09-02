@@ -204,6 +204,33 @@
   }
 }
 
+/* ---------- Floating chip animations (hero TechChips + code caret) ---------- */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes caret {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.animate-float-delay {
+  animation: float 4s ease-in-out 2s infinite;
+}
+.animate-caret {
+  animation: caret 1s step-end infinite;
+}
+
 /* ---------- Background variants (research: 21st.dev backgrounds) ---------- */
 .site-bg {
   position: fixed;
