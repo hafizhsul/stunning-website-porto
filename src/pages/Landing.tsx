@@ -359,9 +359,7 @@ function Navbar() {
 /* ----------------------------------- hero ---------------------------------- */
 
 function Hero() {
-  const { t } = useI18n();
-  const featured =
-    PROJECTS.find((p) => p.id === "inka-eprocurement") ?? PROJECTS[0]!;
+  const { t, pick } = useI18n();
   return (
     <section id="top" className="relative overflow-hidden pb-16 pt-24 sm:pb-20 lg:pb-24">
       <div className="mx-auto grid max-w-6xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr]">
@@ -432,21 +430,36 @@ function Hero() {
           className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
           <a
-            href="#work"
+            href="#skills"
             className="group block overflow-hidden rounded-2xl border bg-card shadow-2xl shadow-primary/10"
           >
-            <img
-              src={featured.image}
-              alt={`${featured.title} interface, built by Hafizh Sulthan Bachtiyar`}
-              className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-            />
-            <span className="flex items-center justify-between gap-3 border-t px-5 py-3.5">
-              <span className="truncate text-sm font-medium">
-                {featured.title}
+            <span className="flex items-center gap-2 border-b bg-muted/50 px-4 py-3">
+              <span className="size-2.5 rounded-full bg-red-400/80" />
+              <span className="size-2.5 rounded-full bg-amber-400/80" />
+              <span className="size-2.5 rounded-full bg-emerald-400/80" />
+              <span className="ml-2 font-mono text-xs text-muted-foreground">
+                hafizh@dev:~/skills
               </span>
-              <span className="flex shrink-0 items-center gap-1.5 font-mono text-xs text-muted-foreground">
-                {featured.year}
-                <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </span>
+            <span className="block bg-[#0d1117] px-5 py-5 font-mono text-[13px] leading-relaxed text-gray-300">
+              <span className="flex gap-2">
+                <span className="text-emerald-400">$</span>
+                <span className="text-gray-400">skills --list</span>
+              </span>
+              {SKILL_GROUPS.map((group, i) => (
+                <span key={i} className="mt-3 block">
+                  <span className="flex gap-2">
+                    <span className="text-cyan-400">/</span>
+                    <span className="text-cyan-300/90">{pick(group.title)}</span>
+                  </span>
+                  <span className="mt-0.5 block pl-4 text-gray-400">
+                    {group.tags.map((tag) => pick(tag)).join(" \u00b7 ")}
+                  </span>
+                </span>
+              ))}
+              <span className="mt-4 flex gap-2">
+                <span className="text-emerald-400">$</span>
+                <span className="inline-block h-4 w-2 animate-pulse bg-emerald-400" />
               </span>
             </span>
           </a>
@@ -1054,7 +1067,7 @@ function Skills() {
 function Contact() {
   const { t } = useI18n();
   return (
-    <section id="contact" className="pb-24 sm:pb-28">
+    <section id="contact" className="mt-24 pb-24 sm:mt-28 sm:pb-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl border bg-card px-6 py-16 text-center shadow-xl shadow-primary/5 sm:px-16 sm:py-20">
