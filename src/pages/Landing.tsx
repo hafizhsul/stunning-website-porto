@@ -366,7 +366,7 @@ function TechChip({
   iconClass,
   className,
 }: {
-  icon: LucideIcon;
+  icon: LucideIcon | IconType;
   label: string;
   detail: string;
   iconClass: string;
