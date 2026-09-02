@@ -10,16 +10,13 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
-  Atom,
   Brain,
-  Braces,
   CheckCircle2,
   Clock,
   Download,
   Github,
   Heart,
   Headphones,
-  Hexagon,
   Mail,
   Menu,
   MessageCircle,
@@ -378,7 +375,7 @@ function TechChip({
   return (
     <div
       className={cn(
-        "absolute z-20 flex items-center gap-2.5 rounded-xl border bg-card/90 px-3 py-2 shadow-lg shadow-primary/10 backdrop-blur",
+        "absolute z-20 flex items-center gap-2.5 rounded-xl border bg-card/90 px-3 py-2 shadow-md shadow-primary/5 backdrop-blur",
         className,
       )}
     >
@@ -396,7 +393,7 @@ function TechChip({
 function Hero() {
   const { t } = useI18n();
   return (
-    <section id="top" className="relative overflow-hidden pb-16 pt-24 sm:pb-20 lg:pb-24">
+    <section id="top" className="relative overflow-hidden pt-32 pb-16 sm:pt-40 lg:pb-60">
       <div className="mx-auto grid max-w-6xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -484,7 +481,7 @@ function Hero() {
             className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-transparent blur-2xl"
           />
           {/* code card */}
-          <div className="relative overflow-hidden rounded-2xl border bg-card/80 shadow-2xl shadow-primary/15 backdrop-blur ring-1 ring-white/5">
+          <div className="relative overflow-hidden rounded-2xl border bg-card/80 shadow-xl shadow-primary/5 backdrop-blur ring-1 ring-white/5">
             <div className="flex items-center gap-2 border-b bg-muted/50 px-4 py-3">
               <span className="size-2.5 rounded-full bg-red-400/80" />
               <span className="size-2.5 rounded-full bg-yellow-400/80" />
@@ -568,21 +565,21 @@ function Hero() {
           </div>
 
           <TechChip
-            icon={Braces}
+            icon={SiPhp}
             label="PHP"
             detail="Backend"
             iconClass="bg-sky-500/15 text-sky-600 dark:text-sky-400"
             className="-right-3 -top-5 animate-float sm:-right-6"
           />
           <TechChip
-            icon={Atom}
+            icon={SiLaravel}
             label="Laravel"
             detail="Framework"
             iconClass="bg-cyan-500/15 text-cyan-600 dark:text-cyan-400"
             className="-left-3 top-1/3 hidden animate-float-delay sm:flex lg:-left-8"
           />
           <TechChip
-            icon={Hexagon}
+            icon={SiKotlin}
             label="Kotlin"
             detail="Android"
             iconClass="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
@@ -590,7 +587,7 @@ function Hero() {
           />
 
           {/* overlapping profile card */}
-          <div className="absolute -bottom-1 left-2 flex items-center gap-3 rounded-2xl border bg-card p-3.5 shadow-xl shadow-primary/10 sm:-left-4">
+          <div className="absolute -bottom-1 left-2 flex items-center gap-3 rounded-2xl border bg-card p-3.5 shadow-lg shadow-primary/5 sm:-left-4">
             <img
               src="/portrait.png"
               alt="Hafizh Sulthan Bachtiyar"
@@ -658,7 +655,7 @@ function ProjectCard({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10"
+      className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary/5"
     >
       <div className="border-b border-border/70">
         <div className="flex items-center gap-1.5 bg-muted/40 px-4 py-2.5">
@@ -848,7 +845,7 @@ function ProjectModal({
         role="dialog"
         aria-modal="true"
         aria-label={project.title}
-        className="relative w-full max-w-2xl overflow-hidden rounded-2xl border bg-card shadow-2xl"
+        className="relative w-full max-w-2xl overflow-hidden rounded-2xl border bg-card shadow-xl shadow-primary/5"
         initial={{ opacity: 0, scale: 0.95, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 16 }}
