@@ -1,11 +1,15 @@
-import { AnimatePresence, motion, MotionConfig, useScroll } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  MotionConfig,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
 import {
   Activity,
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
-  Atom,
-  Braces,
   Brain,
   CheckCircle2,
   Clock,
@@ -13,7 +17,6 @@ import {
   Github,
   Heart,
   Headphones,
-  Hexagon,
   Mail,
   Menu,
   MessageCircle,
@@ -21,13 +24,10 @@ import {
   Moon,
   Network,
   Puzzle,
-  Quote,
   Settings,
   Sparkles,
-  Star,
   Sun,
   Tag,
-  Terminal,
   Users,
   Wrench,
   X,
@@ -65,7 +65,6 @@ import {
   SKILL_GROUPS,
   SOCIALS,
   STRINGS,
-  TESTIMONIALS,
   VALUES,
   resolve,
 } from "@/data/content";
@@ -188,170 +187,6 @@ function ThemeToggle() {
   );
 }
 
-/* ------------------------------ parallax bg ------------------------------- */
-
-function ParallaxBackground() {
-  useEffect(() => {
-    const reduceMotion =
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const items = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-parallax-speed]"),
-    );
-    if (reduceMotion || items.length === 0) return;
-
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const scrolled = window.scrollY;
-      items.forEach((el) => {
-        const speed = parseFloat(el.getAttribute("data-parallax-speed") ?? "0");
-        if (el.classList.contains("watermark")) {
-          el.style.transform = `rotate(-15deg) translateY(${scrolled * speed}px)`;
-        } else {
-          // optional horizontal drift for the deeper glyph layer
-          const dx = parseFloat(el.getAttribute("data-parallax-x") ?? "0");
-          el.style.transform = `translate3d(${scrolled * dx}px, ${scrolled * speed}px, 0)`;
-        }
-      });
-    };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      if (raf) cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
-
-  return (
-    <>
-      <div className="parallax-container hidden" aria-hidden="true">
-        <div className="px-item watermark" data-parallax-speed="0.15">
-        <span className="watermark-brand">hafizhesbe.my.id</span>
-        <span className="watermark-status">
-          &gt;_ INIT OK · MODULES LOADED · AWAITING INPUT
-        </span>
-      </div>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="-0.12"
-        style={{ top: "25%", left: "8%" }}
-      >
-        &gt;_
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="0.25"
-        style={{ top: "45%", left: "88%" }}
-      >
-        {"{}"}
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="-0.18"
-        style={{ top: "70%", left: "12%" }}
-      >
-        {"/>"}
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="0.1"
-        style={{ top: "85%", left: "82%" }}
-      >
-        {"()"}
-      </span>
-    </div>
-
-    {/* second layer: faint glyphs drifting at different speeds for depth */}
-    <div className="parallax-container hidden" aria-hidden="true">
-      <span
-        className="px-item glyph"
-        data-parallax-speed="0.22"
-        data-parallax-x="0.1"
-        style={{ top: "10%", left: "78%", fontSize: "1.6rem", opacity: 0.04 }}
-      >
-        $
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="-0.15"
-        data-parallax-x="-0.08"
-        style={{ top: "22%", left: "12%", fontSize: "2rem", opacity: 0.035 }}
-      >
-        #
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="0.3"
-        data-parallax-x="0.14"
-        style={{ top: "38%", left: "85%", fontSize: "1.3rem", opacity: 0.03 }}
-      >
-        |
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="-0.2"
-        data-parallax-x="0.06"
-        style={{ top: "55%", left: "6%", fontSize: "2.4rem", opacity: 0.045 }}
-      >
-        ~
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="0.18"
-        data-parallax-x="-0.12"
-        style={{ top: "68%", left: "75%", fontSize: "1.5rem", opacity: 0.03 }}
-      >
-        _
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="0.35"
-        data-parallax-x="0.1"
-        style={{ top: "78%", left: "25%", fontSize: "1.3rem", opacity: 0.04 }}
-      >
-        {"./"}
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="-0.1"
-        data-parallax-x="0.05"
-        style={{ top: "88%", left: "60%", fontSize: "1.8rem", opacity: 0.035 }}
-      >
-        {"[]"}
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="0.25"
-        data-parallax-x="-0.1"
-        style={{ top: "30%", left: "55%", fontSize: "1.6rem", opacity: 0.04 }}
-      >
-        {"<>"}
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="0.12"
-        data-parallax-x="0.08"
-        style={{ top: "60%", left: "92%", fontSize: "2rem", opacity: 0.03 }}
-      >
-        {"{}"}
-      </span>
-      <span
-        className="px-item glyph"
-        data-parallax-speed="-0.25"
-        data-parallax-x="-0.06"
-        style={{ top: "82%", left: "88%", fontSize: "1.4rem", opacity: 0.035 }}
-      >
-        {"%%"}
-      </span>
-      </div>
-    </>
-  );
-}
-
 /* ------------------------------- site background ----------------------------- */
 // Final background: dot pattern (variant B) + mouse-responsive drift parallax.
 // 21st.dev research: /s/background (dot) + /s/parallax (mouse-responsive).
@@ -390,25 +225,25 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("work");
-  const { scrollYProgress } = useScroll();
+  const { scrollY, scrollYProgress } = useScroll();
   const { lang, setLang, t, pick } = useI18n();
 
-  useEffect(() => {
-    const ids = NAV_LINKS.map((l) => l.href.slice(1));
-    const onScroll = () => {
-      setScrolled(window.scrollY > 12);
-      const pos = window.scrollY + 140;
-      let current = "";
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.offsetTop <= pos) current = id;
-      }
-      setActive(current || ids[0]);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const ids = NAV_LINKS.map((l) => l.href.slice(1));
+
+  const syncNav = (y: number) => {
+    setScrolled(y > 12);
+    const pos = y + 140;
+    let current = "";
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= pos) current = id;
+    }
+    setActive(current || ids[0]!);
+  };
+
+  useMotionValueEvent(scrollY, "change", syncNav);
+
+  useEffect(() => syncNav(scrollY.get()), []);
 
   return (
     <header
@@ -523,41 +358,12 @@ function Navbar() {
 
 /* ----------------------------------- hero ---------------------------------- */
 
-function TechChip({
-  icon: Icon,
-  label,
-  detail,
-  iconClass,
-  className,
-}: {
-  icon: LucideIcon;
-  label: string;
-  detail: string;
-  iconClass: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "absolute z-20 flex items-center gap-2.5 rounded-xl border bg-card/90 px-3 py-2 shadow-lg shadow-primary/10 backdrop-blur",
-        className,
-      )}
-    >
-      <span className={cn("grid size-8 place-items-center rounded-lg", iconClass)}>
-        <Icon className="size-4" />
-      </span>
-      <span className="text-left">
-        <span className="block text-xs font-semibold leading-none">{label}</span>
-        <span className="mt-1 block text-[10px] text-muted-foreground">{detail}</span>
-      </span>
-    </div>
-  );
-}
-
 function Hero() {
   const { t } = useI18n();
+  const featured =
+    PROJECTS.find((p) => p.id === "inka-eprocurement") ?? PROJECTS[0]!;
   return (
-    <section id="top" className="relative overflow-hidden pt-32 pb-16 sm:pt-40 lg:pb-24">
+    <section id="top" className="relative overflow-hidden pb-16 pt-24 sm:pb-20 lg:pb-24">
       <div className="mx-auto grid max-w-6xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -617,174 +423,33 @@ function Hero() {
             </Button>
           </div>
 
-          <div className="mt-8 flex items-center gap-1.5">
-            {SOCIALS.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={s.label}
-                className="grid size-9 place-items-center rounded-md text-muted-foreground transition-all hover:-translate-y-0.5 hover:text-primary"
-              >
-                <s.icon className="size-[18px]" />
-              </a>
-            ))}
-          </div>
-
-          <div className="mt-12 flex items-center gap-6 sm:gap-8">
-            {[
-              { value: "3+", label: t("hero.stat1") },
-              { value: "4+", label: t("hero.stat2") },
-              { value: "5+", label: t("hero.stat3") },
-            ].map((stat, i) => (
-              <div key={stat.label} className="flex items-center gap-6 sm:gap-8">
-                {i > 0 && <Separator orientation="vertical" className="h-10" />}
-                <div>
-                  <p className="text-2xl font-semibold tracking-tight">{stat.value}</p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">{stat.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 28, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-md pb-10 lg:max-w-none"
+          className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
-          {/* glow */}
-          <div
-            aria-hidden
-            className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-transparent blur-2xl"
-          />
-          {/* code card */}
-          <div className="relative overflow-hidden rounded-2xl border bg-card/80 shadow-2xl shadow-primary/15 backdrop-blur ring-1 ring-white/5">
-            <div className="flex items-center gap-2 border-b bg-muted/50 px-4 py-3">
-              <span className="size-2.5 rounded-full bg-red-400/80" />
-              <span className="size-2.5 rounded-full bg-yellow-400/80" />
-              <span className="size-2.5 rounded-full bg-green-400/80" />
-              <span className="ml-3 flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
-                <Terminal className="size-3.5" />
-                developer.ts
-              </span>
-            </div>
-            <div className="p-5 font-mono text-[13px] leading-7 sm:p-6">
-              <p>
-                <span className="text-muted-foreground">// hello, world 👋</span>
-              </p>
-              <p>
-                <span className="text-violet-500 dark:text-violet-400">const</span>{" "}
-                <span className="text-sky-600 dark:text-sky-400">developer</span>{" "}
-                <span className="text-foreground/70">=</span>{" "}
-                <span className="text-foreground/70">{"{"}</span>
-              </p>
-              <p className="pl-4">
-                <span className="text-sky-600 dark:text-sky-400">name</span>
-                <span className="text-foreground/70">:</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">
-                  "Hafizh Sulthan Bachtiyar"
-                </span>
-                <span className="text-foreground/70">,</span>
-              </p>
-              <p className="pl-4">
-                <span className="text-sky-600 dark:text-sky-400">role</span>
-                <span className="text-foreground/70">:</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">
-                  "Software Engineer"
-                </span>
-                <span className="text-foreground/70">,</span>
-              </p>
-              <p className="pl-4">
-                <span className="text-sky-600 dark:text-sky-400">location</span>
-                <span className="text-foreground/70">:</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">
-                  "Jawa Timur, Indonesia"
-                </span>
-                <span className="text-foreground/70">,</span>
-              </p>
-              <p className="pl-4">
-                <span className="text-sky-600 dark:text-sky-400">stack</span>
-                <span className="text-foreground/70">:</span>{" "}
-                <span className="text-foreground/70">[</span>
-                <span className="text-emerald-600 dark:text-emerald-400">
-                  "Laravel"
-                </span>
-                <span className="text-foreground/70">,</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">"Symfony"</span>
-                <span className="text-foreground/70">,</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">"React"</span>
-                <span className="text-foreground/70">,</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">"TypeScript"</span>
-                <span className="text-foreground/70">,</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">"Android"</span>
-                <span className="text-foreground/70">]</span>
-                <span className="text-foreground/70">,</span>
-              </p>
-              <p className="pl-4">
-                <span className="text-sky-600 dark:text-sky-400">openToWork</span>
-                <span className="text-foreground/70">:</span>{" "}
-                <span className="text-amber-600 dark:text-amber-400">true</span>
-                <span className="text-foreground/70">,</span>
-              </p>
-              <p>
-                <span className="text-foreground/70">{"};"}</span>
-              </p>
-              <p className="mt-1">
-                <span className="text-violet-500 dark:text-violet-400">await</span>{" "}
-                <span className="text-sky-600 dark:text-sky-400">developer</span>
-                <span className="text-foreground/70">.</span>
-                <span className="text-sky-600 dark:text-sky-400">ship</span>
-                <span className="text-foreground/70">(</span>
-                <span className="text-emerald-600 dark:text-emerald-400">
-                  "nextProduct"
-                </span>
-                <span className="text-foreground/70">)</span>
-                <span className="text-foreground/70">;</span>
-                <span className="animate-caret ml-1 inline-block h-4 w-[7px] translate-y-[3px] bg-primary" />
-              </p>
-            </div>
-          </div>
-
-          <TechChip
-            icon={Braces}
-            label="PHP"
-            detail="Backend"
-            iconClass="bg-sky-500/15 text-sky-600 dark:text-sky-400"
-            className="-right-3 -top-5 animate-float sm:-right-6"
-          />
-          <TechChip
-            icon={Atom}
-            label="Laravel"
-            detail="Framework"
-            iconClass="bg-cyan-500/15 text-cyan-600 dark:text-cyan-400"
-            className="-left-3 top-1/3 hidden animate-float-delay sm:flex lg:-left-8"
-          />
-          <TechChip
-            icon={Hexagon}
-            label="Kotlin"
-            detail="Android"
-            iconClass="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
-            className="-bottom-4 right-12 hidden animate-float-delay md:flex"
-          />
-
-          {/* overlapping profile card */}
-          <div className="absolute -bottom-1 left-2 flex items-center gap-3 rounded-2xl border bg-card p-3.5 shadow-xl shadow-primary/10 sm:-left-4">
+          <a
+            href="#work"
+            className="group block overflow-hidden rounded-2xl border bg-card shadow-2xl shadow-primary/10"
+          >
             <img
-              src="/portrait.png"
-              alt="Hafizh Sulthan Bachtiyar"
-              className="size-10 rounded-full object-cover"
+              src={featured.image}
+              alt={`${featured.title} interface, built by Hafizh Sulthan Bachtiyar`}
+              className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
             />
-            <span>
-              <span className="block text-sm font-semibold leading-none">Hafizh Sulthan Bachtiyar</span>
-              <span className="mt-1.5 flex items-center gap-1.5 text-[11px] text-muted-foreground">
-                <span className="size-1.5 rounded-full bg-emerald-500" />
-                {t("hero.status")}
+            <span className="flex items-center justify-between gap-3 border-t px-5 py-3.5">
+              <span className="truncate text-sm font-medium">
+                {featured.title}
+              </span>
+              <span className="flex shrink-0 items-center gap-1.5 font-mono text-xs text-muted-foreground">
+                {featured.year}
+                <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </span>
             </span>
-          </div>
+          </a>
         </motion.div>
       </div>
     </section>
@@ -797,7 +462,7 @@ function TechMarquee() {
   const { t } = useI18n();
   return (
     <section className="border-y bg-muted/40 py-10">
-      <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+      <p className="mb-8 text-center text-sm text-muted-foreground">
         {t("marquee.title")}
       </p>
       <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
@@ -809,20 +474,9 @@ function TechMarquee() {
 
 /* --------------------------------- projects -------------------------------- */
 
-function ProjectPreview({
-  gradient,
-  image,
-}: {
-  gradient: string;
-  image?: string;
-}) {
+function ProjectPreview({ image }: { image?: string }) {
   return (
-    <div
-      className={cn(
-        "relative h-56 overflow-hidden bg-gradient-to-br",
-        gradient,
-      )}
-    >
+    <div className="relative h-56 overflow-hidden bg-muted/40">
       {image && (
         <img
           src={image}
@@ -831,9 +485,6 @@ function ProjectPreview({
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
       )}
-      {/* subtle dark gradient so the image stays legible */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
-      <div className="pointer-events-none absolute inset-0 text-foreground opacity-[0.06] [background-image:radial-gradient(circle_at_1px_1px,currentColor_1px,transparent_0)] [background-size:18px_18px]" />
     </div>
   );
 }
@@ -870,16 +521,13 @@ function ProjectCard({
           aria-label={project.title}
           className="block w-full cursor-zoom-in text-left"
         >
-          <ProjectPreview
-            gradient={project.gradient}
-            image={project.image}
-          />
+          <ProjectPreview image={project.image} />
         </button>
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-6">
         <div className="flex items-center justify-between gap-2">
-          <Badge variant="secondary" className={cn("rounded-full border", project.chip)}>
+          <Badge variant="secondary" className="rounded-full border">
             {project.category}
           </Badge>
           <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
@@ -1118,7 +766,7 @@ function ProjectModal({
 
           <div className="flex flex-col gap-3 p-6">
             <div className="flex items-center justify-between gap-2">
-              <Badge variant="secondary" className={cn("rounded-full border", project.chip)}>
+              <Badge variant="secondary" className="rounded-full border">
                 {project.category}
               </Badge>
               <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
@@ -1192,10 +840,6 @@ function About() {
 
         <div>
           <Reveal>
-            <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-              <span className="h-px w-6 bg-primary/40" />
-              {t("about.eyebrow")}
-            </p>
             <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
               {t("about.title")}
             </h2>
@@ -1329,12 +973,12 @@ function Experience() {
 
 /* ---------------------------------- skills --------------------------------- */
 
-const TAG_ICONS: Record<string, { Icon: LucideIcon | IconType; color: string }> = {
-  "Hardware & software troubleshooting": { Icon: Wrench, color: "#3B82F6" },
-  "Application installation": { Icon: Download, color: "#10B981" },
-  "System configuration": { Icon: Settings, color: "#8B5CF6" },
-  "Remote support": { Icon: Headphones, color: "#F59E0B" },
-  "Basic computer networking": { Icon: Network, color: "#06B6D4" },
+const TAG_ICONS: Record<string, { Icon: LucideIcon | IconType; color?: string }> = {
+  "Hardware & software troubleshooting": { Icon: Wrench },
+  "Application installation": { Icon: Download },
+  "System configuration": { Icon: Settings },
+  "Remote support": { Icon: Headphones },
+  "Basic computer networking": { Icon: Network },
   PHP: { Icon: SiPhp, color: "#777BB4" },
   Kotlin: { Icon: SiKotlin, color: "#7F52FF" },
   JavaScript: { Icon: SiJavascript, color: "#F7DF1E" },
@@ -1342,23 +986,23 @@ const TAG_ICONS: Record<string, { Icon: LucideIcon | IconType; color: string }> 
   "C++": { Icon: SiCplusplus, color: "#00599C" },
   Laravel: { Icon: SiLaravel, color: "#FF2D20" },
   Symfony: { Icon: SiSymfony, color: "#767676" },
-  "Advantech Monitoring": { Icon: Activity, color: "#64748B" },
+  "Advantech Monitoring": { Icon: Activity },
   Android: { Icon: SiAndroid, color: "#3DDC84" },
   Flutter: { Icon: SiFlutter, color: "#02569B" },
   React: { Icon: SiReact, color: "#61DAFB" },
   Vite: { Icon: SiVite, color: "#646CFF" },
   "Tailwind CSS": { Icon: SiTailwindcss, color: "#06B6D4" },
   "Framer Motion": { Icon: Zap, color: "#0055FF" },
-  "Team collaboration": { Icon: Users, color: "#3B82F6" },
-  "User communication": { Icon: MessageSquare, color: "#06B6D4" },
-  "Critical thinking": { Icon: Brain, color: "#8B5CF6" },
-  "Time management": { Icon: Clock, color: "#F59E0B" },
-  "Problem solving": { Icon: Puzzle, color: "#10B981" },
+  "Team collaboration": { Icon: Users },
+  "User communication": { Icon: MessageSquare },
+  "Critical thinking": { Icon: Brain },
+  "Time management": { Icon: Clock },
+  "Problem solving": { Icon: Puzzle },
 };
 
 function SkillTagIcon({ tag }: { tag: Localized }) {
   const key = typeof tag === "string" ? tag : tag.en;
-  const { Icon, color } = TAG_ICONS[key] ?? { Icon: Tag, color: "#64748B" };
+  const { Icon, color } = TAG_ICONS[key] ?? { Icon: Tag };
   return <Icon className="size-3.5 shrink-0" color={color} />;
 }
 
@@ -1405,68 +1049,6 @@ function Skills() {
   );
 }
 
-/* -------------------------------- testimonials ------------------------------ */
-
-export function Testimonials() {
-  const { t } = useI18n();
-  return (
-    <section id="testimonials" className="py-24 sm:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow={t("testi.eyebrow")}
-          title={t("testi.title")}
-          description={t("testi.desc")}
-        />
-        <div className="grid gap-5 md:grid-cols-3">
-          {TESTIMONIALS.map((testimonial, i) => (
-            <Reveal key={i} delay={i * 0.08}>
-              <figure
-                className={`flex h-full flex-col rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 ${
-                  testimonial.quote
-                    ? "border-primary/20 bg-card hover:border-primary/40"
-                    : "border-dashed bg-card/40 hover:border-primary/40"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <Quote className="size-5 text-primary/40" />
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, j) => (
-                      <Star key={j} className="size-4 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-                </div>
-                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  "{testimonial.quote || t("testi.placeholder")}"
-                </blockquote>
-                <figcaption className="mt-6 flex items-center gap-3 border-t pt-4">
-                  <span className="grid size-9 place-items-center rounded-full text-xs font-bold text-primary/70">
-                    {testimonial.name
-                      ? testimonial.name
-                          .split(" ")
-                          .map((part) => part[0])
-                          .slice(0, 2)
-                          .join("")
-                          .toUpperCase()
-                      : "?"}
-                  </span>
-                  <span>
-                    <span className="block text-sm font-semibold text-foreground">
-                      {testimonial.name || t("testi.placeholderName")}
-                    </span>
-                    <span className="block text-xs text-muted-foreground/70">
-                      {testimonial.role || t("testi.placeholderRole")}
-                    </span>
-                  </span>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ---------------------------------- contact --------------------------------- */
 
 function Contact() {
@@ -1477,7 +1059,6 @@ function Contact() {
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl border bg-card px-6 py-16 text-center shadow-xl shadow-primary/5 sm:px-16 sm:py-20">
             <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-[560px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:44px_44px] opacity-40 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_0%,black,transparent)]" />
 
             <div className="relative">
               <Badge variant="secondary" className="mb-6 gap-2 rounded-full px-3.5 py-1.5">
@@ -1602,8 +1183,8 @@ function Footer() {
                 {t("footer.colophon")}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-foreground/70">
-                Built with React, Tailwind CSS & Framer Motion. Set in Inter and
-                JetBrains Mono.
+                Built with React, Tailwind CSS & Framer Motion. Set in Geist and
+                Geist Mono.
               </p>
             </div>
           </div>
@@ -1668,8 +1249,7 @@ export default function Landing() {
       }}
     >
       <MotionConfig reducedMotion="user">
-        <div className="isolate page-bg min-h-screen text-foreground antialiased">
-          <ParallaxBackground />
+        <div className="isolate min-h-screen text-foreground antialiased">
           <SiteBackground />
           <Navbar />
           <main>
@@ -1679,7 +1259,6 @@ export default function Landing() {
             <About />
             <Experience />
             <Skills />
-            <Testimonials />
             <Contact />
           </main>
           <Footer />

@@ -32,13 +32,9 @@ export const EN_STRINGS = {
   "hero.h1.highlight": "digital products",
   "hero.h1.post": "people love to use.",
   "hero.lede":
-    "I'm Hafizh, an Information Technology graduate with hands-on experience in troubleshooting, installing, and configuring systems: across IoT projects, application development, and field operations.",
+    "I'm Hafizh, an IT graduate with hands-on experience across IoT projects, application development, and field operations.",
   "hero.cta1": "View my work",
   "hero.cta2": "Get in touch",
-  "hero.stat1": "Years experience",
-  "hero.stat2": "Projects built",
-  "hero.stat3": "Roles held",
-  "hero.status": "Open to work",
   "marquee.title": "Technologies I work with every day",
   "proj.eyebrow": "Selected work",
   "proj.title": "Projects I'm proud of",
@@ -48,14 +44,13 @@ export const EN_STRINGS = {
   "proj.source": "Source",
   "proj.details": "Details",
   "proj.more": "View more on GitHub",
-  "about.eyebrow": "About",
   "about.title": "Two sides that complete each other.",
   "about.p1":
     "I work hands-on in the field: hardware, networking, user support, from IoT to construction, and I build software too: Laravel, Symfony, and Android apps. I bring structured documentation, cross-team coordination, fast troubleshooting, and a deeper technical understanding.",
   "about.p2": "",
   "about.edu": "Education",
   "about.edu1": "Associate's Degree in Information Technology, Politeknik Negeri Madiun",
-  "about.edu2": "2021–2024 · GPA 3.67/4.00 · MSIB Batch 6",
+  "about.edu2": "2021-2024 · GPA 3.67/4.00 · MSIB Batch 6",
   "about.resume": "Résumé",
   "about.location": "East Java, Indonesia",
   "exp.eyebrow": "Career",
@@ -66,12 +61,6 @@ export const EN_STRINGS = {
   "skills.title": "A stack that ships",
   "skills.desc":
     "Deep, working knowledge across the whole delivery path, not just résumé keywords.",
-  "testi.eyebrow": "Kind words",
-  "testi.title": "What collaborators say",
-  "testi.desc": "I'd rather let the people I've built with do the talking.",
-  "testi.placeholder": "Your testimonial goes here: what was it like working together?",
-  "testi.placeholderName": "Your name",
-  "testi.placeholderRole": "Role · Company",
   "contact.badge": "Get in touch",
   "contact.title":
     "Open to IT Support/Helpdesk roles as well as software project collaboration.",
@@ -100,13 +89,9 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "hero.h1.highlight": "produk digital",
   "hero.h1.post": "yang disukai banyak orang.",
   "hero.lede":
-    "Lulusan D3 Teknologi Informasi dengan pengalaman langsung menangani troubleshooting, instalasi, dan konfigurasi sistem: dari proyek IoT, pengembangan aplikasi, sampai operasional lapangan.",
+    "Lulusan D3 Teknologi Informasi dengan pengalaman langsung di proyek IoT, pengembangan aplikasi, dan operasional lapangan.",
   "hero.cta1": "Lihat karyaku",
   "hero.cta2": "Hubungi saya",
-  "hero.stat1": "Tahun pengalaman",
-  "hero.stat2": "Proyek dikerjakan",
-  "hero.stat3": "Peran profesional",
-  "hero.status": "Terbuka untuk kerja",
   "marquee.title": "Teknologi yang saya pakai setiap hari",
   "proj.eyebrow": "Karya pilihan",
   "proj.title": "Proyek pilihan",
@@ -116,14 +101,13 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "proj.source": "Sumber",
   "proj.details": "Detail",
   "proj.more": "Lihat lainnya di GitHub",
-  "about.eyebrow": "Tentang",
   "about.title": "Dua sisi yang saling melengkapi.",
   "about.p1":
     "Saya bekerja langsung di lapangan: hardware, jaringan, dukungan pengguna, dari IoT sampai konstruksi, dan saya juga membangun software: Laravel, Symfony, dan aplikasi Android. Saya membawa dokumentasi terstruktur, koordinasi lintas tim, troubleshooting cepat, dan pemahaman teknis yang lebih dalam.",
   "about.p2": "",
   "about.edu": "Pendidikan",
   "about.edu1": "D3 Teknologi Informasi, Politeknik Negeri Madiun",
-  "about.edu2": "2021–2024 · IPK 3.67/4.00 · MSIB Batch 6",
+  "about.edu2": "2021-2024 · IPK 3.67/4.00 · MSIB Batch 6",
   "about.resume": "Resume",
   "about.location": "Jawa Timur, Indonesia",
   "exp.eyebrow": "Karier",
@@ -134,12 +118,6 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "skills.title": "Kemampuan",
   "skills.desc":
     "Pengetahuan kerja yang mendalam di seluruh jalur pengiriman, bukan sekadar kata kunci di resume.",
-  "testi.eyebrow": "Kata mereka",
-  "testi.title": "Apa kata kolaborator",
-  "testi.desc": "Biarkan orang-orang yang pernah bekerja sama yang berbicara.",
-  "testi.placeholder": "Testimoni Anda di sini: bagaimana rasanya bekerja sama?",
-  "testi.placeholderName": "Nama Anda",
-  "testi.placeholderRole": "Peran · Perusahaan",
   "contact.badge": "Hubungi Saya",
   "contact.title":
     "Terbuka untuk peran IT Support/Helpdesk maupun kolaborasi proyek software.",
@@ -207,8 +185,6 @@ export interface Project {
   description: Localized;
   tags: string[];
   url: string;
-  chip: string;
-  gradient: string;
   image?: string;
   gallery?: string[];
   links?: { live?: string; source?: string };
@@ -226,8 +202,6 @@ export const PROJECTS: Project[] = [
     },
     tags: ["JavaScript", "Vite", "i18n"],
     url: "router-watch.vercel.app",
-    chip: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20",
-    gradient: "from-cyan-500/15 via-cyan-500/5 to-transparent",
     image: "/router-watch/preview.png",
     links: {
       live: "https://router-watch.vercel.app",
@@ -245,8 +219,6 @@ export const PROJECTS: Project[] = [
     },
     tags: ["Laravel", "Symfony", "e-Procurement"],
     url: "inka-eprocurement",
-    chip: "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20",
-    gradient: "from-sky-500/15 via-sky-500/5 to-transparent",
     image: "/inka/Screenshot_20260803_110422.webp",
     gallery: [
       "/inka/Screenshot_20260803_110422.webp",
@@ -265,8 +237,6 @@ export const PROJECTS: Project[] = [
     },
     tags: ["Kotlin", "Android"],
     url: "stuntzilla",
-    chip: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
-    gradient: "from-indigo-500/15 via-indigo-500/5 to-transparent",
     image: "/stuntzilla/preview.webp",
     gallery: [
       "/stuntzilla/preview.webp",
@@ -291,8 +261,6 @@ export const PROJECTS: Project[] = [
     },
     tags: ["Flutter", "Dart"],
     url: "intervalfit",
-    chip: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20",
-    gradient: "from-rose-500/15 via-rose-500/5 to-transparent",
     image: "/intervalfit/preview.webp",
     gallery: [
       "/intervalfit/preview.webp",
@@ -320,8 +288,6 @@ export const PROJECTS: Project[] = [
     },
     tags: ["React Native", "Expo", "TypeScript"],
     url: "github.com/hafizhsul/saku",
-    chip: "bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20",
-    gradient: "from-teal-500/15 via-teal-500/5 to-transparent",
     image: "/saku/preview.webp",
     gallery: [
       "/saku/preview.webp",
@@ -338,7 +304,7 @@ export const PROJECTS: Project[] = [
 
 export const EXPERIENCE = [
   {
-    period: { en: "Dec 2024 – Jul 2025", id: "Des 2024 – Jul 2025" },
+    period: { en: "Dec 2024 - Jul 2025", id: "Des 2024 - Jul 2025" },
     role: { en: "Logistics Staff", id: "Staf Logistik" },
     company: "CV Pramita Adhipramana",
     location: { en: "Berau, East Kalimantan", id: "Berau, Kalimantan Timur" },
@@ -367,7 +333,7 @@ export const EXPERIENCE = [
     ],
   },
   {
-    period: { en: "May – Sep 2024", id: "Mei – Sep 2024" },
+    period: { en: "May - Sep 2024", id: "Mei - Sep 2024" },
     role: "Software Developer Team",
     company: "Eforel InnoWorks",
     location: "Remote",
@@ -384,7 +350,7 @@ export const EXPERIENCE = [
     tags: ["IoT", "Advantech", "Dashboard"],
   },
   {
-    period: "Feb – Jul 2024",
+    period: "Feb - Jul 2024",
     role: "Mobile Development Cohort",
     company: "Bangkit Academy",
     location: "Remote",
@@ -401,7 +367,7 @@ export const EXPERIENCE = [
     tags: ["Android", "Kotlin", "Mobile"],
   },
   {
-    period: "Jun 2023 – Jan 2024",
+    period: "Jun 2023 - Jan 2024",
     role: "Freelance Fullstack Developer",
     company: "Remote",
     location: { en: "East Java, Indonesia", id: "Jawa Timur, Indonesia" },
@@ -418,7 +384,7 @@ export const EXPERIENCE = [
     tags: ["Laravel", "PHP", "Web"],
   },
   {
-    period: "Jun – Nov 2023",
+    period: "Jun - Nov 2023",
     role: "Software Engineer Intern",
     company: "PT Industri Kereta Api (Persero)",
     location: { en: "Madiun, East Java", id: "Madiun, Jawa Timur" },
@@ -534,28 +500,6 @@ export const VALUES = [
   {
     en: "Fast troubleshooting + deeper technical understanding",
     id: "Troubleshooting cepat + pemahaman teknis yang lebih dalam",
-  },
-];
-
-// Generated placeholder testimonials — swap names/quotes for real ones when available.
-export const TESTIMONIALS: { quote: string; name: string; role: string }[] = [
-  {
-    quote:
-      "Hafizh took over the e-Procurement maintenance work without hand-holding. He resolved vendor access issues that had been open for weeks and documented everything before he left.",
-    name: "Dwi Prasetyo",
-    role: "Supervisor · PT Industri Kereta Api (Persero)",
-  },
-  {
-    quote:
-      "He was the person we could count on to keep the dashboard on schedule during the Bangkit capstone. Reliable, calm under pressure, and always willing to debug late into the night.",
-    name: "Raka Mahendra",
-    role: "Capstone Team Lead · Bangkit Academy",
-  },
-  {
-    quote:
-      "Hafizh delivered the Simag and e-Ticketing systems on time and kept explaining things in plain language until our team was comfortable using them. Professional and easy to work with.",
-    name: "Yusuf Hidayat",
-    role: "System Administrator · Kominfo Ngawi",
   },
 ];
 
