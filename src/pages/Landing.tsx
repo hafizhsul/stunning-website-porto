@@ -111,30 +111,25 @@ function Reveal({
 }
 
 function SectionHeading({
-  eyebrow,
   title,
   description,
+  align = "center",
 }: {
-  eyebrow: string;
   title: string;
   description?: string;
+  align?: "center" | "left";
 }) {
   return (
-    <Reveal className="mx-auto mb-14 max-w-2xl text-center">
-      <p className="mb-3 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-        <span className="h-px w-6 bg-primary/40" />
-        {eyebrow}
-        <span className="h-px w-6 bg-primary/40" />
-      </p>
+    <div className={cn("mb-14 max-w-2xl", align === "center" ? "mx-auto text-center" : "")}>
       <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground">
+        <p className={cn("mt-4 text-pretty text-base leading-relaxed text-muted-foreground", align === "left" && "max-w-xl")}>
           {description}
         </p>
       )}
-    </Reveal>
+    </div>
   );
 }
 
@@ -247,112 +242,125 @@ function Navbar() {
   useEffect(() => syncNav(scrollY.get()), []);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled || menuOpen
-          ? "border-b bg-background/85 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent",
-      )}
-    >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="flex items-center font-semibold tracking-tight">
-          <span className="sm:hidden">Hafizh</span>
-          <span className="hidden sm:block">Hafizh Sulthan Bachtiyar</span>
-        </a>
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div
+        className={cn(
+          "mx-auto transition-[max-width] duration-300",
+          scrolled || menuOpen ? "max-w-5xl" : "max-w-6xl",
+        )}
+      >
+        <nav
+          className={cn(
+            "relative mx-auto flex h-16 items-center justify-between px-4 transition-[background-color,border-color,border-radius,box-shadow] duration-300 sm:px-6",
+            scrolled || menuOpen
+              ? cn(
+                  "mt-3 border bg-background/85 shadow-lg shadow-primary/5 backdrop-blur-xl",
+                  menuOpen ? "rounded-t-2xl border-b-0" : "rounded-2xl",
+                )
+              : "border-transparent bg-transparent",
+          )}
+        >
+          <a href="#top" className="flex items-center font-semibold tracking-tight">
+            <span className="sm:hidden">Hafizh</span>
+            <span className="hidden sm:block">Hafizh Sulthan Bachtiyar</span>
+          </a>
 
-        <div className="hidden items-center gap-1 md:flex">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "rounded-md px-3 py-1.5 text-sm transition-colors",
-                active === link.href.slice(1)
-                  ? "font-medium text-foreground"
-                  : "text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {pick(link.label)}
-            </a>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-2">
-          <div
-            role="group"
-            aria-label="Language"
-            className="flex items-center gap-0.5 rounded-md border bg-card p-0.5"
-          >
-            {(["en", "id"] as const).map((l) => (
-              <button
-                key={l}
-                type="button"
-                onClick={() => setLang(l)}
-                aria-pressed={lang === l}
+          <div className="hidden items-center gap-1 md:flex">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
                 className={cn(
-                  "rounded px-2 py-1 text-xs font-semibold uppercase transition-colors",
-                  lang === l
-                    ? "bg-primary text-primary-foreground"
+                  "rounded-md px-3 py-1.5 text-sm transition-colors",
+                  active === link.href.slice(1)
+                    ? "font-medium text-foreground"
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                {l}
-              </button>
+                {pick(link.label)}
+              </a>
             ))}
           </div>
-          <ThemeToggle />
-          <Button asChild size="sm" className="hidden sm:inline-flex">
-            <a href="#contact">{t("nav.hire")}</a>
-          </Button>
-          <button
-            type="button"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            onClick={() => setMenuOpen((o) => !o)}
-            className="grid size-9 place-items-center rounded-md border bg-card text-foreground md:hidden"
-          >
-            {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
-          </button>
-        </div>
-      </nav>
 
-      <motion.div
-        style={{ scaleX: scrollYProgress }}
-        className="absolute inset-x-0 bottom-0 h-px origin-left bg-primary/60"
-      />
-
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="overflow-hidden border-t md:hidden"
-          >
-            <div className="flex flex-col gap-1 px-4 py-4">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
+          <div className="flex items-center gap-2">
+            <div
+              role="group"
+              aria-label="Language"
+              className="flex items-center gap-0.5 rounded-md border bg-card p-0.5"
+            >
+              {(["en", "id"] as const).map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  onClick={() => setLang(l)}
+                  aria-pressed={lang === l}
+                  className={cn(
+                    "rounded px-2 py-1 text-xs font-semibold uppercase transition-colors",
+                    lang === l
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground",
+                  )}
                 >
-                  {pick(link.label)}
-                </a>
+                  {l}
+                </button>
               ))}
-              <Separator className="my-2" />
-              <div className="flex items-center gap-2">
-                <Button asChild size="sm" className="flex-1">
-                  <a href="#contact" onClick={() => setMenuOpen(false)}>
-                    {t("nav.hire")}
-                  </a>
-                </Button>
-              </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <ThemeToggle />
+            <Button asChild size="sm" className="hidden sm:inline-flex">
+              <a href="#contact">{t("nav.hire")}</a>
+            </Button>
+            <button
+              type="button"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMenuOpen((o) => !o)}
+              className="grid size-9 place-items-center rounded-md border bg-card text-foreground md:hidden"
+            >
+              {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
+            </button>
+          </div>
+
+          <motion.div
+            style={{ scaleX: scrollYProgress }}
+            className={cn(
+              "absolute inset-x-4 -bottom-px h-px origin-left bg-primary/60",
+              menuOpen && "opacity-0",
+            )}
+          />
+        </nav>
+
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="overflow-hidden border-t border-border bg-background/85 backdrop-blur-xl md:hidden"
+            >
+              <div className="flex flex-col gap-1 px-4 py-4 sm:px-6">
+                {NAV_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
+                  >
+                    {pick(link.label)}
+                  </a>
+                ))}
+                <Separator className="my-2" />
+                <div className="flex items-center gap-2">
+                  <Button asChild size="sm" className="flex-1">
+                    <a href="#contact" onClick={() => setMenuOpen(false)}>
+                      {t("nav.hire")}
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </header>
   );
 }
@@ -380,7 +388,7 @@ function TechChip({
       )}
     >
       <span className={cn("grid size-8 place-items-center rounded-lg", iconClass)}>
-        <Icon className="size-4" />
+        <Icon className="size-4" aria-hidden="true" />
       </span>
       <span className="text-left">
         <span className="block text-xs font-semibold leading-none">{label}</span>
@@ -461,7 +469,7 @@ function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={s.label}
-                className="grid size-9 place-items-center rounded-md text-muted-foreground transition-all hover:-translate-y-0.5 hover:text-primary"
+                className="grid size-9 place-items-center rounded-md text-muted-foreground transition-[color,transform] hover:-translate-y-0.5 hover:text-primary"
               >
                 <s.icon className="size-[18px]" />
               </a>
@@ -493,7 +501,7 @@ function Hero() {
             </div>
             <div className="p-5 font-mono text-[13px] leading-7 sm:p-6">
               <p>
-                <span className="text-muted-foreground">// hello, world 👋</span>
+                <span className="text-muted-foreground">// hello, world</span>
               </p>
               <p>
                 <span className="text-violet-500 dark:text-violet-400">const</span>{" "}
@@ -658,14 +666,6 @@ function ProjectCard({
       className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary/5"
     >
       <div className="border-b border-border/70">
-        <div className="flex items-center gap-1.5 bg-muted/40 px-4 py-2.5">
-          <span className="size-2.5 rounded-full bg-border" />
-          <span className="size-2.5 rounded-full bg-border" />
-          <span className="size-2.5 rounded-full bg-border" />
-          <span className="ml-2 truncate rounded-md border bg-card px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
-            {project.url}
-          </span>
-        </div>
         <button
           type="button"
           onClick={onOpen}
@@ -746,19 +746,18 @@ function Projects() {
     <section id="work" className="py-24 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow={t("proj.eyebrow")}
           title={t("proj.title")}
           description={t("proj.desc")}
         />
 
-        <Reveal className="mb-10 flex flex-wrap items-center justify-center gap-2">
+        <div className="mb-10 flex flex-wrap items-center justify-center gap-2">
           {FILTERS.map((f) => (
             <button
               key={f}
               type="button"
               onClick={() => setFilter(f)}
               className={cn(
-                "rounded-full border px-4 py-1.5 text-sm font-medium transition-all",
+                "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors",
                 filter === f
                   ? "border-transparent bg-primary text-primary-foreground shadow-sm"
                   : "bg-card text-muted-foreground hover:border-foreground/20 hover:text-foreground",
@@ -767,7 +766,7 @@ function Projects() {
               {f}
             </button>
           ))}
-        </Reveal>
+        </div>
 
         <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
@@ -781,14 +780,14 @@ function Projects() {
           </AnimatePresence>
         </motion.div>
 
-        <Reveal className="mt-12 text-center">
+        <div className="mt-12 text-center">
           <Button asChild variant="outline">
             <a href="https://github.com/hafizhsul" target="_blank" rel="noreferrer">
               {t("proj.more")}
               <ArrowUpRight className="size-4" />
             </a>
           </Button>
-        </Reveal>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -976,8 +975,7 @@ function About() {
   return (
     <section id="about" className="border-t bg-muted/30 py-24 sm:py-28">
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-        <Reveal>
-          <div className="relative mx-auto w-full max-w-md">
+        <div className="relative mx-auto w-full max-w-md">
             <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-transparent blur-xl" />
             <div className="relative overflow-hidden rounded-3xl border bg-card shadow-xl shadow-primary/5">
               <img
@@ -987,21 +985,16 @@ function About() {
               />
             </div>
           </div>
-        </Reveal>
 
         <div>
-          <Reveal>
-            <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
               {t("about.title")}
             </h2>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p className="mt-5 text-pretty leading-relaxed text-muted-foreground">
+          <p className="mt-5 text-pretty leading-relaxed text-muted-foreground">
               {t("about.p1")}
             </p>
-          </Reveal>
 
-          <Reveal delay={0.12} className="mt-6">
+          <div className="mt-6">
             <div className="rounded-xl border bg-card p-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {t("about.edu")}
@@ -1009,14 +1002,14 @@ function About() {
               <p className="mt-1.5 text-sm font-medium">{t("about.edu1")}</p>
               <p className="mt-1 text-xs text-muted-foreground">{t("about.edu2")}</p>
             </div>
-          </Reveal>
+          </div>
 
-          <Reveal delay={0.16} className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {FACTS.map((f, i) => {
               const inner = (
                 <>
                   <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
-                    <f.icon className="size-4" />
+                    <f.icon className="size-4" aria-hidden="true" />
                   </span>
                   <span>
                     <span className="block text-[11px] uppercase tracking-wider text-muted-foreground">
@@ -1040,18 +1033,16 @@ function About() {
                 </div>
               );
             })}
-          </Reveal>
+          </div>
 
-          <Reveal delay={0.24}>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {VALUES.map((v, i) => (
-                <li key={i} className="flex items-center gap-2.5 text-sm">
-                  <CheckCircle2 className="size-4 shrink-0 text-primary" />
-                  {pick(v)}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+            {VALUES.map((v, i) => (
+              <li key={i} className="flex items-center gap-2.5 text-sm">
+                <CheckCircle2 className="size-4 shrink-0 text-primary" />
+                {pick(v)}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -1066,20 +1057,19 @@ function Experience() {
     <section id="experience" className="py-24 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow={t("exp.eyebrow")}
           title={t("exp.title")}
           description={t("exp.desc")}
+          align="left"
         />
 
         <div className="mx-auto max-w-3xl">
           <ol className="relative space-y-10 border-l border-border/70 pl-8">
-            {EXPERIENCE.map((job, i) => (
+            {EXPERIENCE.map((job) => (
               <li key={job.company} className="relative">
                 <span className="absolute -left-11 top-8 grid size-6 place-items-center rounded-full border bg-background shadow-sm">
                   <span className="size-2 rounded-full bg-primary" />
                 </span>
-                <Reveal delay={i * 0.06}>
-                <div className="group rounded-2xl border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+                <div className="group rounded-2xl border bg-card p-6 shadow-sm transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <span className="rounded-full bg-primary/10 px-2.5 py-1 font-mono text-xs font-medium text-primary">
                       {pick(job.period)}
@@ -1112,7 +1102,6 @@ function Experience() {
                     ))}
                   </div>
                 </div>
-                </Reveal>
               </li>
             ))}
           </ol>
@@ -1154,7 +1143,7 @@ const TAG_ICONS: Record<string, { Icon: LucideIcon | IconType; color?: string }>
 function SkillTagIcon({ tag }: { tag: Localized }) {
   const key = typeof tag === "string" ? tag : tag.en;
   const { Icon, color } = TAG_ICONS[key] ?? { Icon: Tag };
-  return <Icon className="size-3.5 shrink-0" color={color} />;
+  return <Icon className="size-3.5 shrink-0" color={color} aria-hidden="true" />;
 }
 
 function Skills() {
@@ -1163,36 +1152,38 @@ function Skills() {
     <section id="skills" className="border-t bg-muted/30 py-24 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow={t("skills.eyebrow")}
           title={t("skills.title")}
           description={t("skills.desc")}
         />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2">
           {SKILL_GROUPS.map((group, i) => (
-            <Reveal key={i} delay={i * 0.07}>
-              <div className="shine-card group flex h-full flex-col rounded-2xl border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5">
-                <span className="grid size-11 place-items-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+            <div
+              key={i}
+              className="shine-card group flex h-full flex-col rounded-2xl border bg-card p-6 shadow-sm transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
                   <group.icon className="size-5" />
                 </span>
-                <h3 className="mt-4 text-base font-semibold tracking-tight">
+                <h3 className="text-base font-semibold tracking-tight">
                   {pick(group.title)}
                 </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  {pick(group.blurb)}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {group.tags.map((tag, j) => (
-                    <span
-                      key={j}
-                      className="inline-flex items-center gap-1.5 rounded-md border bg-muted/40 px-2 py-1 font-mono text-[11px] text-muted-foreground"
-                    >
-                      <SkillTagIcon tag={tag} />
-                      {pick(tag)}
-                    </span>
-                  ))}
-                </div>
               </div>
-            </Reveal>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {pick(group.blurb)}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {group.tags.map((tag, j) => (
+                  <span
+                    key={j}
+                    className="inline-flex items-center gap-1.5 rounded-md border bg-muted/40 px-2 py-1 font-mono text-[11px] text-muted-foreground"
+                  >
+                    <SkillTagIcon tag={tag} />
+                    {pick(tag)}
+                  </span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -1244,7 +1235,7 @@ function Contact() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={s.label}
-                    className="grid size-10 place-items-center rounded-md border text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary"
+                    className="grid size-10 place-items-center rounded-md border text-muted-foreground transition-[color,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary"
                   >
                     <s.icon className="size-[18px]" />
                   </a>
@@ -1363,7 +1354,7 @@ function WhatsAppCta() {
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-5 right-5 z-40 grid size-12 place-items-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/25 transition-transform hover:scale-110 motion-reduce:transition-none"
+      className="fixed bottom-5 right-5 z-40 grid size-12 place-items-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/25 transition-transform hover:-translate-y-0.5 hover:shadow-xl motion-reduce:transition-none"
     >
       <MessageCircle className="size-6 fill-current" />
     </a>
