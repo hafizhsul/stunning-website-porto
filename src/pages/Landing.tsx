@@ -597,8 +597,9 @@ function Hero() {
           {/* overlapping profile card */}
           <div className="absolute -bottom-1 left-2 flex items-center gap-3 rounded-2xl border bg-card p-3.5 shadow-lg shadow-primary/5 sm:-left-4">
             <img
-              src="/portrait.png"
+              src="/portrait.webp"
               alt="Hafizh Sulthan Bachtiyar"
+              fetchPriority="high"
               className="size-10 rounded-full object-cover"
             />
             <span>
@@ -979,7 +980,7 @@ function About() {
             <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-transparent blur-xl" />
             <div className="relative overflow-hidden rounded-3xl border bg-card shadow-xl shadow-primary/5">
               <img
-                src="/portrait.png"
+                src="/portrait.webp"
                 alt="Hafizh Sulthan Bachtiyar"
                 className="aspect-[4/3] w-full object-cover"
               />
