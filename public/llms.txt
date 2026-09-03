@@ -1,0 +1,34 @@
+# Hafizh Sulthan Bachtiyar — Software Engineer
+
+> Personal portfolio and resume site for Hafizh Sulthan Bachtiyar, a software engineer based in East Java, Indonesia. Focus areas: full-stack web development (Laravel, Symfony, React), Android development (Kotlin), and hands-on IT support. The site is a single-page application (React + Vite) with English and Indonesian locales.
+
+## Profile
+
+- Role: Software Engineer — builds full-stack web apps, Android apps, and IoT dashboards; also provides hands-on IT support.
+- Location: East Java, Indonesia
+- Email: hafizhbachtiyar123@gmail.com
+- GitHub: https://github.com/hafizhsul
+- LinkedIn: https://linkedin.com/in/hafizhsulthan
+
+## Selected projects
+
+- [Router Watch](https://hafizhesbe.my.id/#work) — static directory of AI API gateways that give free credit at signup, listing each gateway's models from its /v1/models endpoint.
+- [INKA e-Procurement](https://hafizhesbe.my.id/#work) — online procurement website maintained with Symfony, supporting 50+ vendor accounts including user-access resolution.
+- [StuntZilla](https://hafizhesbe.my.id/#work) — Android app for detecting stunting symptoms, built with a team during the Bangkit Academy program.
+- [IntervalFit](https://hafizhesbe.my.id/#work) — interval timer for workouts with fast setup, high-readability during exercise, and automatic voice countdown.
+- [Saku](https://hafizhesbe.my.id/#work) — personal finance tracker: income/expense logging, monthly budgets, and recurring transactions, offline-first with data stored on-device.
+
+## Experience highlights
+
+- Software Engineer Intern — PT Industri Kereta Api (Persero), Madiun (Jun–Nov 2023). Built the INKA-CSIRT dashboard in Laravel; enhanced the INKA e-Procurement site in Symfony.
+- Freelance Fullstack Developer (Jun 2023–Jan 2024). Built the Simag website and an e-Ticketing system for Kominfo Ngawi in Laravel.
+- Mobile Development Cohort — Bangkit Academy (2024). Android development; shipped StuntZilla.
+- Software Developer Team — Eforel InnoWorks (May–Sep 2024). IoT hardware-software integration and monitoring dashboards with Advantech tools.
+- Logistics Staff — CV Pramita Adhipramana, Berau (Dec 2024–Jul 2025). Procurement and material distribution for two construction projects, plus on-site IT support.
+
+## Links
+
+- [Resume (PDF)](https://hafizhesbe.my.id/resume.pdf)
+- [GitHub](https://github.com/hafizhsul)
+- [LinkedIn](https://linkedin.com/in/hafizhsulthan)
+- [Sitemap](https://hafizhesbe.my.id/sitemap.xml)
