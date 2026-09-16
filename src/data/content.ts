@@ -1,18 +1,17 @@
 import {
   Braces,
   Github,
-  Heart,
+  GraduationCap,
   Linkedin,
   Mail,
   MapPin,
   MessageCircle,
   Server,
-  Sparkles,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
 
-/* ---------------------------------- i18n ---------------------------------- */
+// i18n
 
 export type Lang = "en" | "id";
 export type Localized = string | { en: string; id: string };
@@ -44,6 +43,8 @@ export const EN_STRINGS = {
   "proj.live": "Live demo",
   "proj.source": "Source",
   "proj.details": "Details",
+  "proj.empty": "No projects in this category yet.",
+  "proj.reset": "Show all projects",
   "proj.more": "View more on GitHub",
   "about.title": "Two sides that complete each other.",
   "about.p1":
@@ -62,7 +63,6 @@ export const EN_STRINGS = {
   "skills.title": "A stack that ships",
   "skills.desc":
     "Deep, working knowledge across the whole delivery path, not just résumé keywords.",
-  "contact.badge": "Get in touch",
   "contact.title":
     "Open to IT Support/Helpdesk roles as well as software project collaboration.",
   "contact.desc":
@@ -102,6 +102,8 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "proj.live": "Demo langsung",
   "proj.source": "Sumber",
   "proj.details": "Detail",
+  "proj.empty": "Belum ada proyek di kategori ini.",
+  "proj.reset": "Tampilkan semua proyek",
   "proj.more": "Lihat lainnya di GitHub",
   "about.title": "Dua sisi yang saling melengkapi.",
   "about.p1":
@@ -120,7 +122,6 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
   "skills.title": "Kemampuan",
   "skills.desc":
     "Pengetahuan kerja yang mendalam di seluruh jalur pengiriman, bukan sekadar kata kunci di resume.",
-  "contact.badge": "Hubungi Saya",
   "contact.title":
     "Terbuka untuk peran IT Support/Helpdesk maupun kolaborasi proyek software.",
   "contact.desc":
@@ -139,7 +140,7 @@ export const ID_STRINGS: Record<keyof typeof EN_STRINGS, string> = {
 export const STRINGS = { en: EN_STRINGS, id: ID_STRINGS };
 export type I18nKey = keyof typeof EN_STRINGS;
 
-/* ---------------------------------- data ---------------------------------- */
+// data
 
 export const NAV_LINKS = [
   { label: { en: "Work", id: "Karya" }, href: "#work" },
@@ -293,12 +294,14 @@ export const PROJECTS: Project[] = [
     image: "/saku/preview.webp",
     gallery: [
       "/saku/preview.webp",
-      "/saku/2026-08-23_20-43.webp",
-      "/saku/2026-08-23_20-44.webp",
-      "/saku/2026-08-23_20-44_1.webp",
-      "/saku/2026-08-23_20-44_2.webp",
-      "/saku/2026-08-23_20-44_3.webp",
-      "/saku/2026-08-23_20-44_4.webp",
+      "/saku/01-beranda.webp",
+      "/saku/02-riwayat.webp",
+      "/saku/03-analisis.webp",
+      "/saku/04-profil.webp",
+      "/saku/05-tambah-pengeluaran.webp",
+      "/saku/06-tambah-pemasukan.webp",
+      "/saku/07-detail-transaksi.webp",
+      "/saku/08-alokasi.webp",
     ],
     links: { source: "https://github.com/hafizhsul/saku" },
   },
@@ -442,21 +445,6 @@ export const SKILL_GROUPS = [
     },
     tags: ["Laravel", "Symfony", "Advantech Monitoring", "Android", "Flutter", "React", "Vite", "Tailwind CSS", "Framer Motion"],
   },
-  {
-    title: "Soft Skills",
-    icon: Heart,
-    blurb: {
-      en: "How I work and communicate in teams.",
-      id: "Cara bekerja dan berkomunikasi dalam tim.",
-    },
-    tags: [
-      { en: "Team collaboration", id: "Kolaborasi tim" },
-      { en: "User communication", id: "Komunikasi pengguna" },
-      { en: "Critical thinking", id: "Berpikir kritis" },
-      { en: "Time management", id: "Manajemen waktu" },
-      "Problem solving",
-    ],
-  },
 ];
 
 type Fact = {
@@ -480,7 +468,7 @@ export const FACTS: Fact[] = [
   },
   { icon: Braces, label: { en: "Focus", id: "Fokus" }, value: "IT Support & Software Dev" },
   {
-    icon: Sparkles,
+    icon: GraduationCap,
     label: { en: "Education", id: "Pendidikan" },
     value: { en: "Associate's Degree in IT", id: "D3 Teknologi Informasi" },
   },
@@ -505,4 +493,3 @@ export const VALUES = [
   },
 ];
 
-/* ------------------------------- tiny helpers ------------------------------ */
