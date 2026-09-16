@@ -63,9 +63,19 @@
     </script>
     <script>
       // Apply saved theme before first paint to avoid a flash of the wrong theme.
+      // No saved choice: follow the OS (prefers-color-scheme).
       (function () {
         try {
-          if (localStorage.getItem("theme") !== "light") {
+          var saved = localStorage.getItem("theme");
+          if (saved === "light") return;
+          if (saved === "dark") {
+            document.documentElement.classList.add("dark");
+            return;
+          }
+          if (
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+          ) {
             document.documentElement.classList.add("dark");
           }
         } catch (e) {}
