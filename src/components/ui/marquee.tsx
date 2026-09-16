@@ -34,7 +34,9 @@ export function Marquee({
           style={{ "--duration": `${speed}s` } as React.CSSProperties}
         >
           {children}
-          {children}
+          <div className="flex" aria-hidden="true">
+            {children}
+          </div>
         </div>
       </div>
     </div>
