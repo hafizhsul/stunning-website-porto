@@ -10,9 +10,7 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
-  Brain,
   CheckCircle2,
-  Clock,
   Download,
   Github,
   Heart,
@@ -20,16 +18,12 @@ import {
   Mail,
   Menu,
   MessageCircle,
-  MessageSquare,
   Moon,
   Network,
-  Puzzle,
   Settings,
-  Sparkles,
   Sun,
   Tag,
   Terminal,
-  Users,
   Wrench,
   X,
   Zap,
@@ -87,7 +81,6 @@ function useI18n() {
   return useContext(I18nContext);
 }
 
-
 function Reveal({
   children,
   delay = 0,
@@ -133,8 +126,6 @@ function SectionHeading({
   );
 }
 
-/* ---------------------------------- theme ---------------------------------- */
-
 function useTheme() {
   const [theme, setTheme] = useState<"light" | "dark">(() =>
     typeof document !== "undefined" &&
@@ -165,7 +156,7 @@ function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      className="grid size-9 place-items-center rounded-md border bg-card text-muted-foreground transition-colors hover:text-foreground"
+      className="relative grid size-8 shrink-0 place-items-center rounded-md border bg-card text-muted-foreground transition-colors after:absolute after:-inset-2 after:content-[''] hover:text-foreground"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
@@ -183,7 +174,7 @@ function ThemeToggle() {
   );
 }
 
-/* ------------------------------- site background ----------------------------- */
+// site background
 // Final background: dot pattern (variant B) + mouse-responsive drift parallax.
 // 21st.dev research: /s/background (dot) + /s/parallax (mouse-responsive).
 function SiteBackground() {
@@ -214,8 +205,6 @@ function SiteBackground() {
     </div>
   );
 }
-
-/* ---------------------------------- navbar --------------------------------- */
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -260,7 +249,7 @@ function Navbar() {
               : "border-transparent bg-transparent",
           )}
         >
-          <a href="#top" className="flex items-center font-semibold tracking-tight">
+          <a href="#top" className="relative flex items-center font-semibold tracking-tight after:absolute after:-inset-3 after:content-['']">
             <span className="sm:hidden">Hafizh</span>
             <span className="hidden sm:block">Hafizh Sulthan Bachtiyar</span>
           </a>
@@ -271,7 +260,7 @@ function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "rounded-md px-3 py-1.5 text-sm transition-colors",
+                  "relative rounded-md px-3 py-1.5 text-sm transition-colors after:absolute after:-inset-3 after:content-['']",
                   active === link.href.slice(1)
                     ? "font-medium text-foreground"
                     : "text-muted-foreground hover:text-foreground",
@@ -286,7 +275,7 @@ function Navbar() {
             <div
               role="group"
               aria-label="Language"
-              className="flex items-center gap-0.5 rounded-md border bg-card p-0.5"
+              className="flex h-8 items-center gap-0.5 rounded-md border bg-card p-0.5"
             >
               {(["en", "id"] as const).map((l) => (
                 <button
@@ -295,7 +284,7 @@ function Navbar() {
                   onClick={() => setLang(l)}
                   aria-pressed={lang === l}
                   className={cn(
-                    "rounded px-2 py-1 text-xs font-semibold uppercase transition-colors",
+                    "relative flex h-7 items-center rounded px-2 text-xs font-semibold uppercase transition-colors after:absolute after:-inset-y-[10px] after:-inset-x-1 after:content-['']",
                     lang === l
                       ? "bg-primary text-primary-foreground"
                       : "text-muted-foreground hover:text-foreground",
@@ -306,14 +295,14 @@ function Navbar() {
               ))}
             </div>
             <ThemeToggle />
-            <Button asChild size="sm" className="hidden sm:inline-flex">
+            <Button asChild size="sm" className="relative hidden h-8 min-h-0 shrink-0 px-3 py-0 text-[13px] after:absolute after:-inset-2 after:content-[''] sm:inline-flex">
               <a href="#contact">{t("nav.hire")}</a>
             </Button>
             <button
               type="button"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               onClick={() => setMenuOpen((o) => !o)}
-              className="grid size-9 place-items-center rounded-md border bg-card text-foreground md:hidden"
+              className="relative grid size-9 shrink-0 place-items-center rounded-md border bg-card text-foreground after:absolute after:-inset-2 after:content-[''] md:hidden"
             >
               {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
             </button>
@@ -335,7 +324,7 @@ function Navbar() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="overflow-hidden border-t border-border bg-background/85 backdrop-blur-xl md:hidden"
+              className="overflow-hidden border-t border-border bg-background md:hidden"
             >
               <div className="flex flex-col gap-1 px-4 py-4 sm:px-6">
                 {NAV_LINKS.map((link) => (
@@ -343,7 +332,7 @@ function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
+                    className="relative rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 transition-colors after:absolute after:-inset-3 after:content-[''] hover:bg-accent hover:text-foreground"
                   >
                     {pick(link.label)}
                   </a>
@@ -365,8 +354,6 @@ function Navbar() {
   );
 }
 
-/* ----------------------------------- hero ---------------------------------- */
-
 function TechChip({
   icon: Icon,
   label,
@@ -383,7 +370,7 @@ function TechChip({
   return (
     <div
       className={cn(
-        "absolute z-20 flex items-center gap-2.5 rounded-xl border bg-card/90 px-3 py-2 shadow-md shadow-primary/5 backdrop-blur",
+        "absolute z-20 flex items-center gap-2.5 rounded-xl border bg-card px-3 py-2 shadow-sm",
         className,
       )}
     >
@@ -456,7 +443,7 @@ function Hero() {
             <Button asChild size="lg" variant="outline">
               <a href="#contact">
                 {t("hero.cta2")}
-                <ArrowUpRight className="size-4" />
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </a>
             </Button>
           </div>
@@ -469,7 +456,7 @@ function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={s.label}
-                className="grid size-9 place-items-center rounded-md text-muted-foreground transition-[color,transform] hover:-translate-y-0.5 hover:text-primary"
+                className="grid size-11 place-items-center rounded-md text-muted-foreground transition-[color,transform] hover:-translate-y-0.5 hover:text-primary"
               >
                 <s.icon className="size-[18px]" />
               </a>
@@ -483,13 +470,13 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-md pb-10 lg:max-w-none"
         >
-          {/* glow */}
+          {/* Single focus glow: marks the code card as the hero focal point (1 of max 2). */}
           <div
             aria-hidden
             className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-transparent blur-2xl"
           />
-          {/* code card */}
-          <div className="relative overflow-hidden rounded-2xl border bg-card/80 shadow-xl shadow-primary/5 backdrop-blur ring-1 ring-white/5">
+          {/* code card: solid surface; the hero glow behind it is the single focus accent */}
+          <div className="relative overflow-hidden rounded-2xl border bg-card shadow-xl shadow-primary/5">
             <div className="flex items-center gap-2 border-b bg-muted/50 px-4 py-3">
               <span className="size-2.5 rounded-full bg-red-400/80" />
               <span className="size-2.5 rounded-full bg-yellow-400/80" />
@@ -504,67 +491,67 @@ function Hero() {
                 <span className="text-muted-foreground">// hello, world</span>
               </p>
               <p>
-                <span className="text-violet-500 dark:text-violet-400">const</span>{" "}
-                <span className="text-sky-600 dark:text-sky-400">developer</span>{" "}
+                <span className="text-violet-700 dark:text-violet-400">const</span>{" "}
+                <span className="text-sky-700 dark:text-sky-400">developer</span>{" "}
                 <span className="text-foreground/70">=</span>{" "}
                 <span className="text-foreground/70">{"{"}</span>
               </p>
               <p className="pl-4">
-                <span className="text-sky-600 dark:text-sky-400">name</span>
+                <span className="text-sky-700 dark:text-sky-400">name</span>
                 <span className="text-foreground/70">:</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">
+                <span className="text-emerald-700 dark:text-emerald-400">
                   "Hafizh Sulthan Bachtiyar"
                 </span>
                 <span className="text-foreground/70">,</span>
               </p>
               <p className="pl-4">
-                <span className="text-sky-600 dark:text-sky-400">role</span>
+                <span className="text-sky-700 dark:text-sky-400">role</span>
                 <span className="text-foreground/70">:</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">
+                <span className="text-emerald-700 dark:text-emerald-400">
                   "Software Engineer"
                 </span>
                 <span className="text-foreground/70">,</span>
               </p>
               <p className="pl-4">
-                <span className="text-sky-600 dark:text-sky-400">location</span>
+                <span className="text-sky-700 dark:text-sky-400">location</span>
                 <span className="text-foreground/70">:</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">
+                <span className="text-emerald-700 dark:text-emerald-400">
                   "Jawa Timur, Indonesia"
                 </span>
                 <span className="text-foreground/70">,</span>
               </p>
               <p className="pl-4">
-                <span className="text-sky-600 dark:text-sky-400">stack</span>
+                <span className="text-sky-700 dark:text-sky-400">stack</span>
                 <span className="text-foreground/70">:</span>{" "}
                 <span className="text-foreground/70">[</span>
-                <span className="text-emerald-600 dark:text-emerald-400">"Laravel"</span>
+                <span className="text-emerald-700 dark:text-emerald-400">"Laravel"</span>
                 <span className="text-foreground/70">,</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">"Symfony"</span>
+                <span className="text-emerald-700 dark:text-emerald-400">"Symfony"</span>
                 <span className="text-foreground/70">,</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">"React"</span>
+                <span className="text-emerald-700 dark:text-emerald-400">"React"</span>
                 <span className="text-foreground/70">,</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">"TypeScript"</span>
+                <span className="text-emerald-700 dark:text-emerald-400">"TypeScript"</span>
                 <span className="text-foreground/70">,</span>{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">"Android"</span>
+                <span className="text-emerald-700 dark:text-emerald-400">"Android"</span>
                 <span className="text-foreground/70">]</span>
                 <span className="text-foreground/70">,</span>
               </p>
               <p className="pl-4">
-                <span className="text-sky-600 dark:text-sky-400">openToWork</span>
+                <span className="text-sky-700 dark:text-sky-400">openToWork</span>
                 <span className="text-foreground/70">:</span>{" "}
-                <span className="text-amber-600 dark:text-amber-400">true</span>
+                <span className="text-amber-700 dark:text-amber-400">true</span>
                 <span className="text-foreground/70">,</span>
               </p>
               <p>
                 <span className="text-foreground/70">{"};"}</span>
               </p>
               <p className="mt-1">
-                <span className="text-violet-500 dark:text-violet-400">await</span>{" "}
-                <span className="text-sky-600 dark:text-sky-400">developer</span>
+                <span className="text-violet-700 dark:text-violet-400">await</span>{" "}
+                <span className="text-sky-700 dark:text-sky-400">developer</span>
                 <span className="text-foreground/70">.</span>
-                <span className="text-sky-600 dark:text-sky-400">ship</span>
+                <span className="text-sky-700 dark:text-sky-400">ship</span>
                 <span className="text-foreground/70">(</span>
-                <span className="text-emerald-600 dark:text-emerald-400">"nextProduct"</span>
+                <span className="text-emerald-700 dark:text-emerald-400">"nextProduct"</span>
                 <span className="text-foreground/70">)</span>
                 <span className="text-foreground/70">;</span>
                 <span className="animate-caret ml-1 inline-block h-4 w-[7px] translate-y-[3px] bg-primary" />
@@ -576,26 +563,26 @@ function Hero() {
             icon={SiPhp}
             label="PHP"
             detail="Backend"
-            iconClass="bg-sky-500/15 text-sky-600 dark:text-sky-400"
-            className="-right-3 -top-5 animate-float sm:-right-6"
+            iconClass="bg-sky-500/15 text-sky-700 dark:text-sky-400"
+            className="-right-3 -top-5 sm:-right-6"
           />
           <TechChip
             icon={SiLaravel}
             label="Laravel"
             detail="Framework"
             iconClass="bg-cyan-500/15 text-cyan-600 dark:text-cyan-400"
-            className="-left-3 top-1/3 hidden animate-float-delay sm:flex lg:-left-8"
+            className="-left-3 top-1/3 hidden sm:flex lg:-left-8"
           />
           <TechChip
             icon={SiKotlin}
             label="Kotlin"
             detail="Android"
-            iconClass="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
-            className="-bottom-4 right-12 hidden animate-float-delay md:flex"
+            iconClass="bg-emerald-500/15 text-emerald-700 dark:text-emerald-400"
+            className="-bottom-4 right-12 hidden md:flex"
           />
 
-          {/* overlapping profile card */}
-          <div className="absolute -bottom-1 left-2 flex items-center gap-3 rounded-2xl border bg-card p-3.5 shadow-lg shadow-primary/5 sm:-left-4">
+          {/* overlapping profile card: secondary elevation below the code-card focal */}
+          <div className="absolute -bottom-1 left-2 flex items-center gap-3 rounded-2xl border bg-card p-3.5 shadow-md sm:-left-4">
             <img
               src="/portrait.webp"
               alt="Hafizh Sulthan Bachtiyar"
@@ -616,8 +603,6 @@ function Hero() {
   );
 }
 
-/* --------------------------------- marquee --------------------------------- */
-
 function TechMarquee() {
   const { t } = useI18n();
   return (
@@ -631,8 +616,6 @@ function TechMarquee() {
     </section>
   );
 }
-
-/* --------------------------------- projects -------------------------------- */
 
 function ProjectPreview({ image }: { image?: string }) {
   return (
@@ -652,9 +635,11 @@ function ProjectPreview({ image }: { image?: string }) {
 function ProjectCard({
   project,
   onOpen,
+  featured = false,
 }: {
   project: Project;
   onOpen: () => void;
+  featured?: boolean;
 }) {
   const { t, pick } = useI18n();
   return (
@@ -664,7 +649,11 @@ function ProjectCard({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary/5"
+      className={cn(
+        "group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary/5",
+        // Featured card (newest in current filter) gets a primary tint to mark hierarchy.
+        featured && "border-primary/25",
+      )}
     >
       <div className="border-b border-border/70">
         <button
@@ -704,7 +693,7 @@ function ProjectCard({
               href={project.links.live}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary"
+              className="inline-flex min-h-[44px] items-center gap-1 text-sm font-medium transition-colors hover:text-primary"
             >
               {t("proj.live")}
               <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -715,7 +704,7 @@ function ProjectCard({
               href={project.links.source}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex min-h-[44px] items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               <Github className="size-4" />
               {t("proj.source")}
@@ -724,10 +713,11 @@ function ProjectCard({
           <button
             type="button"
             onClick={onOpen}
-            className="ml-auto inline-flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary"
+            data-details-for={project.id}
+            className="ml-auto inline-flex min-h-[44px] items-center gap-1 text-sm font-medium transition-colors hover:text-primary"
           >
             {t("proj.details")}
-            <ArrowUpRight className="size-4" />
+            <ArrowRight className="size-4" />
           </button>
         </div>
       </div>
@@ -749,16 +739,17 @@ function Projects() {
         <SectionHeading
           title={t("proj.title")}
           description={t("proj.desc")}
+          align="left"
         />
 
-        <div className="mb-10 flex flex-wrap items-center justify-center gap-2">
+        <div className="mb-10 flex flex-wrap items-center gap-2">
           {FILTERS.map((f) => (
             <button
               key={f}
               type="button"
               onClick={() => setFilter(f)}
               className={cn(
-                "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors",
+                "inline-flex min-h-[44px] items-center rounded-full border px-4 text-sm font-medium transition-colors",
                 filter === f
                   ? "border-transparent bg-primary text-primary-foreground shadow-sm"
                   : "bg-card text-muted-foreground hover:border-foreground/20 hover:text-foreground",
@@ -771,15 +762,31 @@ function Projects() {
 
         <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project) => (
+            {filtered.map((project, i) => (
               <ProjectCard
                 key={project.id}
                 project={project}
                 onOpen={() => setActive(project)}
+                featured={i === 0}
               />
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {filtered.length === 0 && (
+          <div className="mx-auto max-w-md rounded-2xl border bg-card p-8 text-center">
+            <p className="text-sm font-medium">{t("proj.empty")}</p>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="mt-4"
+              onClick={() => setFilter("All")}
+            >
+              {t("proj.reset")}
+            </Button>
+          </div>
+        )}
 
         <div className="mt-12 text-center">
           <Button asChild variant="outline">
@@ -814,14 +821,53 @@ function ProjectModal({
       ? [project.image]
       : [];
   const [idx, setIdx] = useState(0);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  // Capture the opener during render: by the time effects run, autoFocus
+  // has already moved focus inside the dialog. Stable across re-renders.
+  const openerRef = useRef<HTMLElement | null>(null);
+  if (openerRef.current === null && typeof document !== "undefined") {
+    openerRef.current = document.activeElement as HTMLElement | null;
+  }
+  // onClose is an inline arrow from the parent; keep it in a ref so the
+  // mount/unmount effect below runs exactly once per open (stable prev focus).
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
 
   useEffect(() => {
     setIdx(0);
   }, [project.id]);
 
   useEffect(() => {
+    // Move focus explicitly into the dialog (autoFocus is unreliable).
+    dialogRef.current
+      ?.querySelector<HTMLElement>('button[aria-label="Close"]')
+      ?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        closeRef.current();
+        return;
+      }
+      // Trap Tab inside the dialog so keyboard users can't slip behind it.
+      if (e.key === "Tab") {
+        const root = dialogRef.current;
+        if (!root) return;
+        const items = Array.from(
+          root.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((el) => el.offsetParent !== null);
+        if (items.length === 0) return;
+        const first = items[0]!;
+        const last = items[items.length - 1]!;
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+        return;
+      }
       if (e.key === "ArrowRight") setIdx((i) => Math.min(i + 1, gallery.length - 1));
       if (e.key === "ArrowLeft") setIdx((i) => Math.max(i - 1, 0));
     };
@@ -830,8 +876,32 @@ function ProjectModal({
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      // Return focus to the opener; it may have moved, so re-query by stable id.
+      const prev = openerRef.current;
+      try {
+        if (prev && document.contains(prev)) {
+          prev.focus();
+        } else {
+          const prevId =
+            prev?.dataset?.detailsFor ??
+            prev?.getAttribute("aria-label") ??
+            undefined;
+          if (prevId) {
+            const fallback =
+              document.querySelector<HTMLElement>(
+                `[data-details-for="${CSS.escape(prevId)}"]`,
+              ) ??
+              Array.from(
+                document.querySelectorAll<HTMLElement>("#work button"),
+              ).find((el) => el.getAttribute("aria-label") === prevId);
+            fallback?.focus?.();
+          }
+        }
+      } catch {
+        // ignore focus errors (element unmounted, etc.)
+      }
     };
-  }, [onClose, gallery.length]);
+  }, [gallery.length]);
 
   return (
     <motion.div
@@ -839,9 +909,10 @@ function ProjectModal({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onClick={onClose}
+      onClick={() => closeRef.current()}
     >
       <motion.div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label={project.title}
@@ -854,10 +925,10 @@ function ProjectModal({
       >
         <button
           type="button"
-          onClick={onClose}
+          onClick={() => closeRef.current()}
           autoFocus
           aria-label="Close"
-          className="absolute right-3 top-3 z-10 grid size-8 place-items-center rounded-full border bg-background/90 text-muted-foreground transition-colors hover:text-foreground"
+          className="absolute right-3 top-3 z-10 grid size-11 place-items-center rounded-full border bg-background/90 text-muted-foreground transition-colors hover:text-foreground"
         >
           <X className="size-4" />
         </button>
@@ -893,7 +964,7 @@ function ProjectModal({
                     type="button"
                     onClick={() => setIdx((i) => i - 1)}
                     aria-label="Previous screenshot"
-                    className="absolute left-3 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                    className="absolute left-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-black/50 text-white transition-colors hover:bg-black/70"
                   >
                     <ArrowLeft className="size-4" />
                   </button>
@@ -903,12 +974,12 @@ function ProjectModal({
                     type="button"
                     onClick={() => setIdx((i) => i + 1)}
                     aria-label="Next screenshot"
-                    className="absolute right-3 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                    className="absolute right-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-black/50 text-white transition-colors hover:bg-black/70"
                   >
                     <ArrowRight className="size-4" />
                   </button>
                 )}
-                <span className="absolute bottom-3 right-3 rounded-full bg-black/50 px-2 py-0.5 font-mono text-[11px] text-white backdrop-blur-sm">
+                <span className="absolute bottom-3 right-3 rounded-full bg-black/50 px-2 py-0.5 font-mono text-[11px] text-white">
                   {idx + 1} / {gallery.length}
                 </span>
               </>
@@ -943,7 +1014,7 @@ function ProjectModal({
                     href={project.links.live}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary"
+                    className="inline-flex min-h-[44px] items-center gap-1 text-sm font-medium transition-colors hover:text-primary"
                   >
                     {t("proj.live")}
                     <ArrowUpRight className="size-4" />
@@ -954,7 +1025,7 @@ function ProjectModal({
                     href={project.links.source}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    className="inline-flex min-h-[44px] items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                   >
                     <Github className="size-4" />
                     {t("proj.source")}
@@ -969,16 +1040,13 @@ function ProjectModal({
   );
 }
 
-/* ----------------------------------- about --------------------------------- */
-
 function About() {
   const { t, pick } = useI18n();
   return (
     <section id="about" className="border-t bg-muted/30 py-24 sm:py-28">
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div className="relative mx-auto w-full max-w-md">
-            <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-primary/15 via-transparent to-transparent blur-xl" />
-            <div className="relative overflow-hidden rounded-3xl border bg-card shadow-xl shadow-primary/5">
+            <div className="relative overflow-hidden rounded-3xl border bg-card shadow-md">
               <img
                 src="/portrait.webp"
                 alt="Hafizh Sulthan Bachtiyar"
@@ -1050,8 +1118,6 @@ function About() {
   );
 }
 
-/* -------------------------------- experience ------------------------------- */
-
 function Experience() {
   const { t, pick } = useI18n();
   return (
@@ -1112,8 +1178,6 @@ function Experience() {
   );
 }
 
-/* ---------------------------------- skills --------------------------------- */
-
 const TAG_ICONS: Record<string, { Icon: LucideIcon | IconType; color?: string }> = {
   "Hardware & software troubleshooting": { Icon: Wrench },
   "Application installation": { Icon: Download },
@@ -1134,11 +1198,6 @@ const TAG_ICONS: Record<string, { Icon: LucideIcon | IconType; color?: string }>
   Vite: { Icon: SiVite, color: "#646CFF" },
   "Tailwind CSS": { Icon: SiTailwindcss, color: "#06B6D4" },
   "Framer Motion": { Icon: Zap, color: "#0055FF" },
-  "Team collaboration": { Icon: Users },
-  "User communication": { Icon: MessageSquare },
-  "Critical thinking": { Icon: Brain },
-  "Time management": { Icon: Clock },
-  "Problem solving": { Icon: Puzzle },
 };
 
 function SkillTagIcon({ tag }: { tag: Localized }) {
@@ -1192,22 +1251,15 @@ function Skills() {
   );
 }
 
-/* ---------------------------------- contact --------------------------------- */
-
 function Contact() {
   const { t } = useI18n();
   return (
     <section id="contact" className="mt-24 pb-24 sm:mt-28 sm:pb-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border bg-card px-6 py-16 text-center shadow-xl shadow-primary/5 sm:px-16 sm:py-20">
-            <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-[560px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+          <div className="relative overflow-hidden rounded-3xl border bg-card px-6 py-16 text-center shadow-md sm:px-16 sm:py-20">
 
             <div className="relative">
-              <Badge variant="secondary" className="mb-6 gap-2 rounded-full px-3.5 py-1.5">
-                <Sparkles className="size-3.5 text-primary" />
-                {t("contact.badge")}
-              </Badge>
               <h2 className="mx-auto max-w-2xl text-balance text-3xl font-semibold tracking-tight sm:text-5xl">
                 {t("contact.title")}
               </h2>
@@ -1236,7 +1288,7 @@ function Contact() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={s.label}
-                    className="grid size-10 place-items-center rounded-md border text-muted-foreground transition-[color,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary"
+                    className="grid size-11 place-items-center rounded-md border text-muted-foreground transition-[color,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary"
                   >
                     <s.icon className="size-[18px]" />
                   </a>
@@ -1249,8 +1301,6 @@ function Contact() {
     </section>
   );
 }
-
-/* ---------------------------------- footer --------------------------------- */
 
 function Footer() {
   const { t, pick } = useI18n();
@@ -1346,8 +1396,6 @@ function Footer() {
   );
 }
 
-/* ------------------------------- whatsapp cta ------------------------------ */
-
 function WhatsAppCta() {
   return (
     <a
@@ -1361,8 +1409,6 @@ function WhatsAppCta() {
     </a>
   );
 }
-
-/* ---------------------------------- landing -------------------------------- */
 
 export default function Landing() {
   const [lang, setLang] = useState<Lang>(() => {
