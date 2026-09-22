@@ -206,6 +206,7 @@ export const PROJECTS: Project[] = [
     tags: ["JavaScript", "Vite", "i18n"],
     url: "router-watch.vercel.app",
     image: "/router-watch/preview.webp",
+    gallery: ["/router-watch/preview.webp", "/router-watch/gateway-list.webp"],
     links: {
       live: "https://router-watch.vercel.app",
       source: "https://github.com/hafizhsul/router-watch",
