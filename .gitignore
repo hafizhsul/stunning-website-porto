@@ -33,3 +33,6 @@ AGENTS.md
 # agent/test artifacts
 .omo/
 .playwright-mcp/
+
+# dead code kept locally (not deleted)
+archive/

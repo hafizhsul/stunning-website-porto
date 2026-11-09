@@ -187,7 +187,6 @@ export interface Project {
   year: string;
   description: Localized;
   tags: string[];
-  url: string;
   image?: string;
   gallery?: string[];
   links?: { live?: string; source?: string };
@@ -204,7 +203,6 @@ export const PROJECTS: Project[] = [
       id: "Direktori AI API gateway yang memberikan kredit gratis saat signup, dengan daftar model dari endpoint /v1/models tiap gateway. Static site, tanpa backend.",
     },
     tags: ["JavaScript", "Vite", "i18n"],
-    url: "router-watch.vercel.app",
     image: "/router-watch/preview.webp",
     gallery: ["/router-watch/preview.webp", "/router-watch/gateway-list.webp"],
     links: {
@@ -222,7 +220,6 @@ export const PROJECTS: Project[] = [
       id: "Website procurement online, menangani 50+ akun vendor termasuk resolusi akses pengguna.",
     },
     tags: ["Laravel", "Symfony", "e-Procurement"],
-    url: "inka-eprocurement",
     image: "/inka/Screenshot_20260803_110422.webp",
     gallery: [
       "/inka/Screenshot_20260803_110422.webp",
@@ -240,7 +237,6 @@ export const PROJECTS: Project[] = [
       id: "Aplikasi mobile untuk deteksi gejala stunting.",
     },
     tags: ["Kotlin", "Android"],
-    url: "stuntzilla",
     image: "/stuntzilla/preview.webp",
     gallery: [
       "/stuntzilla/preview.webp",
@@ -264,7 +260,6 @@ export const PROJECTS: Project[] = [
       id: "Interval timer cepat setup, mudah dibaca saat olahraga, dengan voice countdown otomatis.",
     },
     tags: ["Flutter", "Dart"],
-    url: "intervalfit",
     image: "/intervalfit/preview.webp",
     gallery: [
       "/intervalfit/preview.webp",
@@ -291,7 +286,6 @@ export const PROJECTS: Project[] = [
       id: "Aplikasi catatan keuangan pribadi yang tenang: catat pemasukan & pengeluaran, anggaran bulanan, dan transaksi berulang otomatis. Offline-first, data tersimpan di perangkat.",
     },
     tags: ["React Native", "Expo", "TypeScript"],
-    url: "github.com/hafizhsul/saku",
     image: "/saku/preview.webp",
     gallery: [
       "/saku/preview.webp",
